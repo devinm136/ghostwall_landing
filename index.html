@@ -13,7 +13,7 @@
       margin: 0; padding: 0;
       background: black;
       color: white;
-      font-family: monospace, monospace;
+      font-family: 'Courier New', Courier, monospace;
       scroll-behavior: smooth;
       overflow-x: hidden;
       -webkit-font-smoothing: antialiased;
@@ -21,11 +21,10 @@
       transition: background-color 0.8s ease;
     }
     a {
-      color: white;
+      color: #0f0;
       text-decoration: none;
-      opacity: 0.85;
+      opacity: 0.8;
       transition: opacity 0.3s;
-      font-family: monospace;
     }
     a:hover {
       opacity: 1;
@@ -34,7 +33,7 @@
     nav {
       position: fixed;
       top: 0; left: 0; right: 0;
-      background: rgba(0,0,0,0.85);
+      background: rgba(0,0,0,0.5);
       backdrop-filter: blur(8px);
       border-bottom: 1px solid rgba(255,255,255,0.1);
       display: flex;
@@ -45,8 +44,6 @@
       z-index: 1000;
       font-weight: bold;
       letter-spacing: 0.1em;
-      font-family: monospace;
-      color: white;
     }
     nav .nav-links a {
       margin-left: 1.5rem;
@@ -55,21 +52,20 @@
       padding-top: 4.5rem;
       position: relative;
       z-index: 1;
-      background: black;
-      font-family: monospace;
     }
     section {
       padding: 8rem 1.5rem 8rem;
       max-width: 900px;
-      margin: 0 auto 4rem;
-      background: black;
+      margin: 0 auto;
+      background: rgba(0,0,0,0.85);
       border-radius: 12px;
+      backdrop-filter: blur(10px);
       box-shadow: 0 0 20px rgba(0,255,0,0.15);
       opacity: 0;
       transform: translateY(40px);
       transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+      margin-bottom: 4rem;
       text-align: center;
-      color: white;
     }
     section.visible {
       opacity: 1;
@@ -82,26 +78,25 @@
       justify-content: center;
       align-items: center;
       padding: 0 1.5rem;
-      margin-bottom: 6rem;
       background: transparent;
-      color: white;
+      margin-bottom: 6rem;
     }
     #intro h1 {
       font-size: 6rem;
       font-weight: 900;
+      color: white;
       margin: 0;
       letter-spacing: 0.2em;
       line-height: 1.1;
       user-select: none;
-      font-family: monospace;
     }
     #intro p {
       font-size: 1.75rem;
+      color: #ccc;
       max-width: 700px;
       margin-top: 1rem;
       user-select: none;
-      font-family: monospace;
-      color: white;
+      text-align: center;
     }
     h2 {
       font-size: 2.25rem;
@@ -109,25 +104,24 @@
       letter-spacing: 0.12em;
       color: white;
       user-select: none;
-      font-family: monospace;
     }
     p {
       font-size: 1.05rem;
       line-height: 1.6;
+      color: #ccc;
       margin-bottom: 1.5rem;
-      font-family: monospace;
-      color: white;
     }
     pre {
-      background: #000;
+      background: rgba(0,0,0,0.8);
       padding: 1rem 1.25rem;
       border-radius: 8px;
       overflow-x: auto;
       color: #0f0;
       font-size: 1rem;
       font-family: monospace;
-      border: 1px solid rgba(0, 255, 0, 0.4);
-      box-shadow: none;
+      box-shadow:
+        0 0 5px rgba(0,255,0,0.6),
+        inset 0 0 5px rgba(0,255,0,0.3);
       user-select: all;
       text-align: center;
       max-width: 600px;
@@ -142,7 +136,6 @@
       max-width: 500px;
       margin: 0 auto;
       justify-content: center;
-      font-family: monospace;
     }
     input[type="email"] {
       flex: 1 1 auto;
@@ -151,8 +144,8 @@
       border: none;
       border-radius: 8px;
       outline: none;
-      color: black;
       font-family: monospace;
+      color: black;
     }
     button {
       background-color: #00ff00;
@@ -175,7 +168,6 @@
       color: #555;
       background: black;
       user-select: none;
-      font-family: monospace;
     }
     canvas#matrix {
       position: fixed;
