@@ -189,7 +189,12 @@
       z-index: 0;
       pointer-events: none;
       display: block;
-      transition: background-color 0.8s ease;
+      transition: opacity 1s ease;
+      opacity: 1;
+      background: black;
+    }
+    body.hide-matrix canvas#matrix {
+      opacity: 0;
     }
     @media (max-width: 640px) {
       #intro h1 {
@@ -313,12 +318,12 @@ TTL: 60m</pre>
     resize();
     animate();
 
-    // Background fade to black on scroll
+    // Toggle matrix visibility on scroll
     window.addEventListener('scroll', () => {
-      if(window.scrollY > window.innerHeight / 2) {
-        document.body.style.backgroundColor = '#000';
+      if (window.scrollY > window.innerHeight * 0.9) {
+        document.body.classList.add('hide-matrix');
       } else {
-        document.body.style.backgroundColor = 'transparent';
+        document.body.classList.remove('hide-matrix');
       }
     });
 
@@ -335,5 +340,11 @@ TTL: 60m</pre>
     window.addEventListener('scroll', checkFade);
     window.addEventListener('load', checkFade);
   </script>
+
+  <style>
+    body.hide-matrix canvas#matrix {
+      opacity: 0 !important;
+    }
+  </style>
 </body>
 </html>
