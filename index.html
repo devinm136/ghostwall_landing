@@ -18,14 +18,13 @@
       overflow-x: hidden;
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
-      transition: background-color 0.8s ease;
     }
     a {
       color: white;
       text-decoration: none;
       opacity: 0.85;
       transition: opacity 0.3s;
-      font-family: monospace;
+      font-family: monospace, monospace;
     }
     a:hover {
       opacity: 1;
@@ -45,35 +44,20 @@
       z-index: 1000;
       font-weight: bold;
       letter-spacing: 0.1em;
-      font-family: monospace;
+      font-family: monospace, monospace;
       color: white;
     }
     nav .nav-links a {
       margin-left: 1.5rem;
+      font-family: monospace, monospace;
+      color: white;
     }
     main {
       padding-top: 4.5rem;
       position: relative;
       z-index: 1;
-      background: black;
-      font-family: monospace;
-    }
-    section {
-      padding: 8rem 1.5rem 8rem;
-      max-width: 900px;
-      margin: 0 auto 4rem;
-      background: black;
-      border-radius: 12px;
-      box-shadow: 0 0 20px rgba(0,255,0,0.15);
-      opacity: 0;
-      transform: translateY(40px);
-      transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-      text-align: center;
-      color: white;
-    }
-    section.visible {
-      opacity: 1;
-      transform: none;
+      background: black; /* solid black for behind phases */
+      font-family: monospace, monospace;
     }
     #intro {
       height: 100vh;
@@ -83,8 +67,11 @@
       align-items: center;
       padding: 0 1.5rem;
       margin-bottom: 6rem;
-      background: transparent;
+      background: transparent; /* transparent so matrix shows fully */
       color: white;
+      text-align: center;
+      user-select: none;
+      font-family: monospace, monospace;
     }
     #intro h1 {
       font-size: 6rem;
@@ -93,15 +80,33 @@
       letter-spacing: 0.2em;
       line-height: 1.1;
       user-select: none;
-      font-family: monospace;
+      font-family: monospace, monospace;
     }
     #intro p {
       font-size: 1.75rem;
       max-width: 700px;
       margin-top: 1rem;
       user-select: none;
-      font-family: monospace;
+      font-family: monospace, monospace;
       color: white;
+    }
+    section {
+      padding: 8rem 1.5rem 8rem;
+      max-width: 900px;
+      margin: 0 auto 4rem;
+      background: black; /* solid black blocks matrix */
+      border-radius: 12px;
+      box-shadow: 0 0 20px rgba(0,255,0,0.15);
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+      text-align: center;
+      color: white;
+      font-family: monospace, monospace;
+    }
+    section.visible {
+      opacity: 1;
+      transform: none;
     }
     h2 {
       font-size: 2.25rem;
@@ -109,13 +114,13 @@
       letter-spacing: 0.12em;
       color: white;
       user-select: none;
-      font-family: monospace;
+      font-family: monospace, monospace;
     }
     p {
       font-size: 1.05rem;
       line-height: 1.6;
       margin-bottom: 1.5rem;
-      font-family: monospace;
+      font-family: monospace, monospace;
       color: white;
     }
     pre {
@@ -125,7 +130,7 @@
       overflow-x: auto;
       color: #0f0;
       font-size: 1rem;
-      font-family: monospace;
+      font-family: monospace, monospace;
       border: 1px solid rgba(0, 255, 0, 0.4);
       box-shadow: none;
       user-select: all;
@@ -142,7 +147,7 @@
       max-width: 500px;
       margin: 0 auto;
       justify-content: center;
-      font-family: monospace;
+      font-family: monospace, monospace;
     }
     input[type="email"] {
       flex: 1 1 auto;
@@ -152,7 +157,7 @@
       border-radius: 8px;
       outline: none;
       color: black;
-      font-family: monospace;
+      font-family: monospace, monospace;
     }
     button {
       background-color: #00ff00;
@@ -163,7 +168,7 @@
       color: black;
       cursor: pointer;
       transition: background-color 0.3s;
-      font-family: monospace;
+      font-family: monospace, monospace;
     }
     button:hover {
       background-color: #00cc00;
@@ -175,7 +180,7 @@
       color: #555;
       background: black;
       user-select: none;
-      font-family: monospace;
+      font-family: monospace, monospace;
     }
     canvas#matrix {
       position: fixed;
@@ -185,7 +190,13 @@
       z-index: 0;
       pointer-events: none;
       display: block;
-      transition: background-color 0.8s ease;
+      transition: opacity 1s ease;
+      opacity: 1;
+      background: black;
+    }
+    body.hide-matrix canvas#matrix {
+      opacity: 0 !important;
+      pointer-events: none;
     }
     @media (max-width: 640px) {
       #intro h1 {
@@ -308,15 +319,6 @@ TTL: 60m</pre>
     window.addEventListener('resize', resize);
     resize();
     animate();
-
-    // Background fade to black on scroll
-    window.addEventListener('scroll', () => {
-      if(window.scrollY > window.innerHeight / 2) {
-        document.body.style.backgroundColor = '#000';
-      } else {
-        document.body.style.backgroundColor = 'transparent';
-      }
-    });
 
     // Scroll fade-in animation
     const fadeSections = document.querySelectorAll('.fade-section');
