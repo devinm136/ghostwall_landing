@@ -5,15 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>GhostWall™ - The Last Firewall You'll Ever Need</title>
   <style>
-    /* Reset + base */
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
     body, html {
       margin: 0; padding: 0;
       background: black;
       color: white;
-      font-family: monospace, monospace;
+      font-family: 'Courier New', Courier, monospace;
       scroll-behavior: smooth;
       overflow-x: hidden;
       -webkit-font-smoothing: antialiased;
@@ -82,7 +79,7 @@
       margin-bottom: 6rem;
     }
     #intro h1 {
-      font-size: clamp(2.5rem, 8vw, 6rem) !important;
+      font-size: 6rem;
       font-weight: 900;
       color: white;
       margin: 0;
@@ -119,47 +116,13 @@
       color: #0f0;
       font-size: 1rem;
       font-family: monospace;
-      box-shadow:
-        0 0 5px rgba(0,255,0,0.6),
-        inset 0 0 5px rgba(0,255,0,0.3);
+      box-shadow: 0 0 5px rgba(0,255,0,0.6), inset 0 0 5px rgba(0,255,0,0.3);
       user-select: all;
       text-align: center;
       max-width: 600px;
       margin: 0 auto;
       white-space: pre-wrap;
       word-break: break-word;
-    }
-    form {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 1rem;
-      max-width: 500px;
-      margin: 0 auto;
-      justify-content: center;
-    }
-    input[type="email"] {
-      flex: 1 1 auto;
-      padding: 0.75rem 1rem;
-      font-size: 1rem;
-      border: none;
-      border-radius: 8px;
-      outline: none;
-      font-family: monospace;
-      color: black;
-    }
-    button {
-      background-color: #00ff00;
-      border: none;
-      border-radius: 8px;
-      padding: 0.75rem 1.5rem;
-      font-weight: 700;
-      color: black;
-      cursor: pointer;
-      transition: background-color 0.3s;
-      font-family: monospace;
-    }
-    button:hover {
-      background-color: #00cc00;
     }
     footer {
       padding: 2rem 1rem;
@@ -179,27 +142,16 @@
       display: block;
       transition: background-color 0.8s ease;
     }
-
-    /* Responsive font size for GhostWall title */
     @media (max-width: 640px) {
-      #intro h1 {
-        font-size: 3.5rem;
-      }
-      #intro p {
-        font-size: 1.25rem;
-      }
-      h2 {
-        font-size: 1.5rem;
-      }
-      section {
-        padding: 4rem 1rem 5rem;
-      }
+      #intro h1 { font-size: 3.5rem; }
+      #intro p { font-size: 1.25rem; }
+      h2 { font-size: 1.5rem; }
+      section { padding: 4rem 1rem 5rem; }
     }
   </style>
 </head>
 <body>
   <canvas id="matrix"></canvas>
-
   <nav>
     <div>GhostWall™</div>
     <div class="nav-links">
@@ -208,13 +160,11 @@
       <a href="#get-access">Sign In</a>
     </div>
   </nav>
-
   <main>
     <section id="intro" class="visible">
       <h1>GhostWall™</h1>
       <p>The last firewall you'll ever need. Real-time zero-day patching. AI-native defense.</p>
     </section>
-
     <section id="phase1" class="fade-section">
       <h2>Phase I — Detection</h2>
       <p>GhostWall begins as a passive observer. Tied into Suricata’s engine, it scans every packet in real time using machine learning classification. Threats are flagged with confidence scores, logged, and pushed to a secure alert pipeline — no action taken, only observation.</p>
@@ -224,7 +174,6 @@
 [AI] Confidence: 99.2%
 [LOG] Writing to alerts.json...</pre>
     </section>
-
     <section id="phase2" class="fade-section">
       <h2>Phase II — Response</h2>
       <p>GhostWall shifts from watcher to warrior. With validated patterns and thresholds, the AI now injects live firewall rules in milliseconds. It doesn’t just block threats — it predicts them, preemptively locking down vectors before damage occurs.</p>
@@ -233,7 +182,6 @@ DROP src 192.168.1.45 dst ANY
 Confidence: 98.7%
 TTL: 60m</pre>
     </section>
-
     <section id="phase3" class="fade-section">
       <h2>Phase III — Evolution</h2>
       <p>GhostWall’s agent becomes self-referential. Monitoring its own success rate, it rewrites decision logic autonomously — upgrading its neural net, adapting thresholds, and patching gaps. No dev input needed. Just raw AI improvement.</p>
@@ -241,7 +189,6 @@ TTL: 60m</pre>
 + threshold = 0.95  // Auto-adjusted from failed prediction
 + add_behavior_pattern('port_scan_variant_B')</pre>
     </section>
-
     <section id="phase4" class="fade-section">
       <h2>Phase IV — GhostChain</h2>
       <p>GhostWall becomes a network. Local agents sync encrypted zero-day signatures across nodes — no central server, no human intervention. Each unit contributes to a shared global memory. One node sees it, all remember it.</p>
@@ -250,80 +197,53 @@ TTL: 60m</pre>
 &gt; Confidence: 99.1%
 &gt; Signature Shared: ✔</pre>
     </section>
-
     <section id="get-access" class="fade-section">
       <h2>Get Early Access</h2>
-      <p>Be the first to try GhostWall. We’ll notify you when it’s ready.</p>
-      <form action="https://formspree.io/f/xqalkqlp" method="POST">
-        <input type="email" name="email" placeholder="you@domain.com" required />
-        <button type="submit">Request Access</button>
+      <form action="https://formspree.io/f/xqalkqlp" method="POST" style="max-width: 600px; margin: 0 auto; font-family: monospace; background: rgba(0,0,0,0.7); padding: 2rem; border-radius: 12px; box-shadow: 0 0 20px rgba(0,255,0,0.1); color: white;">
+        <div style="margin-bottom: 1.25rem;">
+          <label for="full-name" style="display:block; margin-bottom: 0.25rem;">Full Name</label>
+          <input type="text" id="full-name" name="full-name" placeholder="Enter your name" style="width:100%; padding: 0.75rem; border-radius: 6px; border: none; font-family: monospace;" />
+        </div>
+        <div style="margin-bottom: 1.25rem;">
+          <label for="email-address" style="display:block; margin-bottom: 0.25rem;">Email Address</label>
+          <input type="email" id="email-address" name="email-address" placeholder="Enter your email address" required style="width:100%; padding: 0.75rem; border-radius: 6px; border: none; font-family: monospace;" />
+        </div>
+        <div style="margin-bottom: 1.25rem;">
+          <label for="phone-number" style="display:block; margin-bottom: 0.25rem;">Phone Number</label>
+          <input type="text" id="phone-number" name="phone-number" placeholder="Optional" style="width:100%; padding: 0.75rem; border-radius: 6px; border: none; font-family: monospace;" />
+        </div>
+        <div style="margin-bottom: 1.25rem;">
+          <label for="interest" style="display:block; margin-bottom: 0.25rem;">Product or Service</label>
+          <input type="text" id="interest" name="interest" placeholder="Optional" style="width:100%; padding: 0.75rem; border-radius: 6px; border: none; font-family: monospace;" />
+        </div>
+        <div style="margin-bottom: 1.25rem;">
+          <label for="interest-reason" style="display:block; margin-bottom: 0.25rem;">Why are you interested?</label>
+          <textarea id="interest-reason" name="interest-reason" placeholder="Optional" style="width:100%; padding: 0.75rem; border-radius: 6px; border: none; font-family: monospace; resize: vertical;"></textarea>
+        </div>
+        <div style="margin-bottom: 1.25rem;">
+          <label for="referral-source" style="display:block; margin-bottom: 0.25rem;">How did you hear about us?</label>
+          <input type="text" id="referral-source" name="referral-source" placeholder="Optional" style="width:100%; padding: 0.75rem; border-radius: 6px; border: none; font-family: monospace;" />
+        </div>
+        <div style="margin-bottom: 1rem;">
+          <label style="display: flex; align-items: center;">
+            <input type="checkbox" name="update-consent" required style="margin-right: 0.5rem;" />
+            I want to receive early access updates.
+          </label>
+        </div>
+        <div style="margin-bottom: 1.5rem;">
+          <label style="display: flex; align-items: center;">
+            <input type="checkbox" name="terms-privacy" required style="margin-right: 0.5rem;" />
+            I agree to the Terms & Privacy Policy.
+          </label>
+        </div>
+        <div style="text-align: center;">
+          <button type="submit" style="background-color: #00ff00; color: black; border: none; border-radius: 8px; padding: 0.75rem 1.5rem; font-weight: bold; font-family: monospace; cursor: pointer;">Join Waitlist</button>
+        </div>
       </form>
-      <p style="font-size: 0.8rem; color: #555;">No spam. No selling. Just one email when it’s live.</p>
     </section>
   </main>
-
   <footer>
     Built by Devin McCall • GhostWall™ 2025
   </footer>
-
-  <script>
-    const canvas = document.getElementById('matrix');
-    const ctx = canvas.getContext('2d');
-    let width, height;
-    let cols;
-    let ypos = [];
-
-    function resize() {
-      width = canvas.width = window.innerWidth;
-      height = canvas.height = window.innerHeight;
-      cols = Math.floor(width / 20);
-      ypos = Array(cols).fill(0);
-    }
-
-    function matrix() {
-      ctx.fillStyle = 'rgba(0, 0, 0, 0.08)';
-      ctx.fillRect(0, 0, width, height);
-      ctx.fillStyle = 'rgba(0, 255, 0, 0.4)';
-      ctx.font = '16pt monospace';
-
-      ypos.forEach((y, index) => {
-        const text = Math.random() < 0.5 ? '0' : '1';
-        const x = index * 20;
-        ctx.fillText(text, x, y);
-        ypos[index] = y > height + Math.random() * 10000 ? 0 : y + 20;
-      });
-    }
-
-    function animate() {
-      matrix();
-      requestAnimationFrame(animate);
-    }
-
-    window.addEventListener('resize', resize);
-    resize();
-    animate();
-
-    // Background fade to black on scroll
-    window.addEventListener('scroll', () => {
-      if(window.scrollY > window.innerHeight / 2) {
-        document.body.style.backgroundColor = '#000';
-      } else {
-        document.body.style.backgroundColor = 'transparent';
-      }
-    });
-
-    // Scroll fade-in animation
-    const fadeSections = document.querySelectorAll('.fade-section');
-    function checkFade() {
-      fadeSections.forEach(section => {
-        const rect = section.getBoundingClientRect();
-        if(rect.top < window.innerHeight * 0.75) {
-          section.classList.add('visible');
-        }
-      });
-    }
-    window.addEventListener('scroll', checkFade);
-    window.addEventListener('load', checkFade);
-  </script>
 </body>
 </html>
