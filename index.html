@@ -1,294 +1,335 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>GhostWall™ - Binary Background Everywhere</title>
-<style>
-  * {
-    margin: 0; padding: 0; box-sizing: border-box;
-  }
-  html, body {
-    height: 100%;
-    font-family: monospace, monospace;
-    background: black;
-    color: white;
-    overflow-x: hidden;
-  }
-  #matrix {
-    position: fixed;
-    top: 0; left: 0;
-    width: 100vw;
-    height: 100vh;
-    z-index: 0;
-    pointer-events: none;
-    background: black;
-    display: block;
-  }
-  nav {
-    position: fixed;
-    top: 0; left: 0; right: 0;
-    background: rgba(0,0,0,0.85);
-    backdrop-filter: blur(8px);
-    border-bottom: 1px solid rgba(255,255,255,0.1);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1rem 2rem;
-    font-weight: bold;
-    letter-spacing: 0.1em;
-    font-size: 1rem;
-    z-index: 10;
-    color: white;
-  }
-  nav a {
-    margin-left: 1.5rem;
-    color: white;
-    text-decoration: none;
-    font-family: monospace, monospace;
-  }
-  nav a:hover {
-    text-decoration: underline;
-  }
-  main {
-    position: relative;
-    z-index: 1;
-    padding-top: 4.5rem;
-    /* no background */
-  }
-  section {
-    max-width: 900px;
-    margin: 3rem auto 6rem auto;
-    padding: 6rem 2rem;
-    border-radius: 12px;
-    box-shadow: 0 0 25px rgba(0,255,0,0.15);
-    opacity: 0;
-    transform: translateY(40px);
-    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-    color: white;
-    text-align: center;
-  }
-  section.visible {
-    opacity: 1;
-    transform: none;
-  }
-  section h2 {
-    font-size: 2.5rem;
-    margin-bottom: 1rem;
-    font-family: monospace, monospace;
-  }
-  section p {
-    font-size: 1.1rem;
-    line-height: 1.6;
-    margin-bottom: 1.5rem;
-    font-family: monospace, monospace;
-  }
-  pre {
-    background: rgba(0,0,0,0.5);
-    padding: 1rem 1.25rem;
-    border-radius: 8px;
-    color: #0f0;
-    border: 1px solid rgba(0,255,0,0.4);
-    max-width: 600px;
-    margin: 0 auto;
-    overflow-x: auto;
-    white-space: pre-wrap;
-    word-break: break-word;
-    text-align: center;
-    font-family: monospace, monospace;
-  }
-  form {
-    display: flex;
-    justify-content: center;
-    gap: 1rem;
-    max-width: 500px;
-    margin: 0 auto;
-  }
-  input[type="email"] {
-    flex-grow: 1;
-    padding: 0.75rem 1rem;
-    font-size: 1rem;
-    border-radius: 8px;
-    border: none;
-    outline: none;
-    font-family: monospace, monospace;
-    color: black;
-  }
-  button {
-    padding: 0.75rem 1.5rem;
-    background: #00ff00;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    font-weight: 700;
-    font-family: monospace, monospace;
-    color: black;
-    transition: background 0.3s;
-  }
-  button:hover {
-    background: #00cc00;
-  }
-  footer {
-    text-align: center;
-    padding: 2rem 1rem;
-    font-size: 0.85rem;
-    color: #555;
-    font-family: monospace, monospace;
-  }
-  #intro {
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    user-select: none;
-    padding: 0 2rem;
-    font-family: monospace, monospace;
-  }
-  #intro h1 {
-    font-size: 6rem;
-    font-weight: 900;
-    letter-spacing: 0.3em;
-    line-height: 1.1;
-    margin-bottom: 0.3em;
-  }
-  #intro p {
-    font-size: 1.75rem;
-    max-width: 700px;
-  }
-  @media (max-width: 640px) {
-    #intro h1 {
-      font-size: 3.5rem;
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>GhostWall™ - The Last Firewall You'll Ever Need</title>
+  <style>
+    /* Reset + base */
+    * {
+      box-sizing: border-box;
     }
-    #intro p {
-      font-size: 1.25rem;
+    body, html {
+      margin: 0; padding: 0;
+      background: black;
+      color: white;
+      font-family: monospace, monospace;
+      scroll-behavior: smooth;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      transition: background-color 0.8s ease;
+    }
+    a {
+      color: white;
+      text-decoration: none;
+      opacity: 0.85;
+      transition: opacity 0.3s;
+      font-family: monospace;
+    }
+    a:hover {
+      opacity: 1;
+      text-decoration: underline;
+    }
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      background: rgba(0,0,0,0.85);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 1.5rem;
+      font-size: 0.9rem;
+      z-index: 1000;
+      font-weight: bold;
+      letter-spacing: 0.1em;
+      font-family: monospace;
+      color: white;
+    }
+    nav .nav-links a {
+      margin-left: 1.5rem;
+    }
+    main {
+      padding-top: 4.5rem;
+      position: relative;
+      z-index: 1;
+      background: black;
+      font-family: monospace;
     }
     section {
-      padding: 4rem 1rem;
+      padding: 8rem 1.5rem 8rem;
+      max-width: 900px;
+      margin: 0 auto 4rem;
+      background: black;
+      border-radius: 12px;
+      box-shadow: 0 0 20px rgba(0,255,0,0.15);
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+      text-align: center;
+      color: white;
     }
-  }
-</style>
+    section.visible {
+      opacity: 1;
+      transform: none;
+    }
+    #intro {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 0 1.5rem;
+      margin-bottom: 6rem;
+      background: transparent;
+      color: white;
+    }
+    #intro h1 {
+      font-size: 6rem;
+      font-weight: 900;
+      margin: 0;
+      letter-spacing: 0.2em;
+      line-height: 1.1;
+      user-select: none;
+      font-family: monospace;
+    }
+    #intro p {
+      font-size: 1.75rem;
+      max-width: 700px;
+      margin-top: 1rem;
+      user-select: none;
+      font-family: monospace;
+      color: white;
+    }
+    h2 {
+      font-size: 2.25rem;
+      margin-bottom: 1rem;
+      letter-spacing: 0.12em;
+      color: white;
+      user-select: none;
+      font-family: monospace;
+    }
+    p {
+      font-size: 1.05rem;
+      line-height: 1.6;
+      margin-bottom: 1.5rem;
+      font-family: monospace;
+      color: white;
+    }
+    pre {
+      background: #000;
+      padding: 1rem 1.25rem;
+      border-radius: 8px;
+      overflow-x: auto;
+      color: #0f0;
+      font-size: 1rem;
+      font-family: monospace;
+      border: 1px solid rgba(0, 255, 0, 0.4);
+      box-shadow: none;
+      user-select: all;
+      text-align: center;
+      max-width: 600px;
+      margin: 0 auto;
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+    form {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      max-width: 500px;
+      margin: 0 auto;
+      justify-content: center;
+      font-family: monospace;
+    }
+    input[type="email"] {
+      flex: 1 1 auto;
+      padding: 0.75rem 1rem;
+      font-size: 1rem;
+      border: none;
+      border-radius: 8px;
+      outline: none;
+      color: black;
+      font-family: monospace;
+    }
+    button {
+      background-color: #00ff00;
+      border: none;
+      border-radius: 8px;
+      padding: 0.75rem 1.5rem;
+      font-weight: 700;
+      color: black;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      font-family: monospace;
+    }
+    button:hover {
+      background-color: #00cc00;
+    }
+    footer {
+      padding: 2rem 1rem;
+      text-align: center;
+      font-size: 0.85rem;
+      color: #555;
+      background: black;
+      user-select: none;
+      font-family: monospace;
+    }
+    canvas#matrix {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: 0;
+      pointer-events: none;
+      display: block;
+      transition: background-color 0.8s ease;
+    }
+    @media (max-width: 640px) {
+      #intro h1 {
+        font-size: 3.5rem;
+      }
+      #intro p {
+        font-size: 1.25rem;
+      }
+      h2 {
+        font-size: 1.5rem;
+      }
+      section {
+        padding: 4rem 1rem 5rem;
+      }
+    }
+  </style>
 </head>
 <body>
-<canvas id="matrix"></canvas>
+  <canvas id="matrix"></canvas>
 
-<nav>
-  <div>GhostWall™</div>
-  <div>
-    <a href="#phase1">Docs</a>
-    <a href="#phase2">Demo</a>
-    <a href="#get-access">Sign In</a>
-  </div>
-</nav>
+  <nav>
+    <div>GhostWall™</div>
+    <div class="nav-links">
+      <a href="#phase1">Docs</a>
+      <a href="#phase2">Demo</a>
+      <a href="#get-access">Sign In</a>
+    </div>
+  </nav>
 
-<main>
-  <section id="intro">
-    <h1>GhostWall™</h1>
-    <p>The last firewall you'll ever need. Real-time zero-day patching. AI-native defense.</p>
-  </section>
+  <main>
+    <section id="intro" class="visible">
+      <h1>GhostWall™</h1>
+      <p>The last firewall you'll ever need. Real-time zero-day patching. AI-native defense.</p>
+    </section>
 
-  <section id="phase1" class="fade-section">
-    <h2>Phase I — Detection</h2>
-    <p>GhostWall begins as a passive observer. Tied into Suricata’s engine, it scans every packet in real time using machine learning classification. Threats are flagged with confidence scores, logged, and pushed to a secure alert pipeline — no action taken, only observation.</p>
-    <pre>&gt; suricata -c /etc/suricata/config.yaml
+    <section id="phase1" class="fade-section">
+      <h2>Phase I — Detection</h2>
+      <p>GhostWall begins as a passive observer. Tied into Suricata’s engine, it scans every packet in real time using machine learning classification. Threats are flagged with confidence scores, logged, and pushed to a secure alert pipeline — no action taken, only observation.</p>
+      <pre>&gt; suricata -c /etc/suricata/config.yaml
 [AI] Threat detected: 192.168.0.12
 [AI] Action: Alert + Log
 [AI] Confidence: 99.2%
 [LOG] Writing to alerts.json...</pre>
-  </section>
+    </section>
 
-  <section id="phase2" class="fade-section">
-    <h2>Phase II — Response</h2>
-    <p>GhostWall shifts from watcher to warrior. With validated patterns and thresholds, the AI now injects live firewall rules in milliseconds. It doesn’t just block threats — it predicts them, preemptively locking down vectors before damage occurs.</p>
-    <pre>[FIREWALL] Rule injected:
+    <section id="phase2" class="fade-section">
+      <h2>Phase II — Response</h2>
+      <p>GhostWall shifts from watcher to warrior. With validated patterns and thresholds, the AI now injects live firewall rules in milliseconds. It doesn’t just block threats — it predicts them, preemptively locking down vectors before damage occurs.</p>
+      <pre>[FIREWALL] Rule injected:
 DROP src 192.168.1.45 dst ANY
 Confidence: 98.7%
 TTL: 60m</pre>
-  </section>
+    </section>
 
-  <section id="phase3" class="fade-section">
-    <h2>Phase III — Evolution</h2>
-    <p>GhostWall’s agent becomes self-referential. Monitoring its own success rate, it rewrites decision logic autonomously — upgrading its neural net, adapting thresholds, and patching gaps. No dev input needed. Just raw AI improvement.</p>
-    <pre>- threshold = 0.90
+    <section id="phase3" class="fade-section">
+      <h2>Phase III — Evolution</h2>
+      <p>GhostWall’s agent becomes self-referential. Monitoring its own success rate, it rewrites decision logic autonomously — upgrading its neural net, adapting thresholds, and patching gaps. No dev input needed. Just raw AI improvement.</p>
+      <pre>- threshold = 0.90
 + threshold = 0.95  // Auto-adjusted from failed prediction
 + add_behavior_pattern('port_scan_variant_B')</pre>
-  </section>
+    </section>
 
-  <section id="phase4" class="fade-section">
-    <h2>Phase IV — GhostChain</h2>
-    <p>GhostWall becomes a network. Local agents sync encrypted zero-day signatures across nodes — no central server, no human intervention. Each unit contributes to a shared global memory. One node sees it, all remember it.</p>
-    <pre>[NODE: #07F3] Received update from NODE: #11C9
+    <section id="phase4" class="fade-section">
+      <h2>Phase IV — GhostChain</h2>
+      <p>GhostWall becomes a network. Local agents sync encrypted zero-day signatures across nodes — no central server, no human intervention. Each unit contributes to a shared global memory. One node sees it, all remember it.</p>
+      <pre>[NODE: #07F3] Received update from NODE: #11C9
 &gt; New Threat ID: ZX9-HYDRA
 &gt; Confidence: 99.1%
 &gt; Signature Shared: ✔</pre>
-  </section>
+    </section>
 
-  <section id="get-access" class="fade-section">
-    <h2>Get Early Access</h2>
-    <p>Be the first to try GhostWall. We’ll notify you when it’s ready.</p>
-    <form action="https://formspree.io/f/moqpzngq" method="POST">
-      <input type="email" name="email" placeholder="you@domain.com" required />
-      <button type="submit">Request Access</button>
-    </form>
-    <p style="font-size: 0.8rem; color: #555;">No spam. No selling. Just one email when it’s live.</p>
-  </section>
-</main>
+    <section id="get-access" class="fade-section">
+      <h2>Get Early Access</h2>
+      <p>Be the first to try GhostWall. We’ll notify you when it’s ready.</p>
+      <form action="https://formspree.io/f/moqpzngq" method="POST">
+        <input type="email" name="email" placeholder="you@domain.com" required />
+        <button type="submit">Request Access</button>
+      </form>
+      <p style="font-size: 0.8rem; color: #555;">No spam. No selling. Just one email when it’s live.</p>
+    </section>
+  </main>
 
-<footer>
-  Built by Devin McCall • GhostWall™ 2025
-</footer>
+  <footer>
+    Built by Devin McCall • GhostWall™ 2025
+  </footer>
 
-<script>
-  const canvas = document.getElementById('matrix');
-  const ctx = canvas.getContext('2d');
-  let width, height;
-  let cols;
-  let ypos = [];
+  <script>
+    const canvas = document.getElementById('matrix');
+    const ctx = canvas.getContext('2d');
+    let width, height;
+    let cols;
+    let ypos = [];
 
-  function resize() {
-    width = canvas.width = window.innerWidth;
-    height = canvas.height = window.innerHeight;
-    cols = Math.floor(width / 20);
-    ypos = Array(cols).fill(0);
-  }
+    function resize() {
+      width = canvas.width = window.innerWidth;
+      height = canvas.height = window.innerHeight;
+      cols = Math.floor(width / 20);
+      ypos = Array(cols).fill(0);
+    }
 
-  function matrix() {
-    ctx.fillStyle = 'rgba(0, 0, 0, 0.08)';
-    ctx.fillRect(0, 0, width, height);
-    ctx.fillStyle = 'rgba(0, 255, 0, 0.4)';
-    ctx.font = '16pt monospace';
+    function matrix() {
+      ctx.fillStyle = 'rgba(0, 0, 0, 0.08)';
+      ctx.fillRect(0, 0, width, height);
+      ctx.fillStyle = 'rgba(0, 255, 0, 0.4)';
+      ctx.font = '16pt monospace';
 
-    ypos.forEach((y, index) => {
-      const text = Math.random() < 0.5 ? '0' : '1';
-      const x = index * 20;
-      ctx.fillText(text, x, y);
-      ypos[index] = y > height + Math.random() * 10000 ? 0 : y + 20;
-    });
-  }
+      ypos.forEach((y, index) => {
+        const text = Math.random() < 0.5 ? '0' : '1';
+        const x = index * 20;
+        ctx.fillText(text, x, y);
+        ypos[index] = y > height + Math.random() * 10000 ? 0 : y + 20;
+      });
+    }
 
-  function animate() {
-    matrix();
-    requestAnimationFrame(animate);
-  }
+    function animate() {
+      matrix();
+      requestAnimationFrame(animate);
+    }
 
-  window.addEventListener('resize', resize);
-  resize();
-  animate();
+    window.addEventListener('resize', resize);
+    resize();
+    animate();
 
-  // Scroll fade-in animation
-  const fadeSections = document.querySelectorAll('.fade-section');
-  function checkFade() {
-    fadeSections.forEach(section => {
-      const rect = section.getBoundingClientRect();
-      if(rect.top < window.innerHeight * 0.75) {
-        section.classList.add('visible');
+    // Background fade to black on scroll
+    window.addEventListener('scroll', () => {
+      if(window.scrollY > window.innerHeight / 2) {
+        document.body.style.backgroundColor = '#000';
+      } else {
+        document.body.style.backgroundColor = 'transparent';
       }
     });
-  }
-  window.addEventListener('scroll', checkFade);
-  window.addEventListener('load', checkFade);
-</script>
 
+    // Scroll fade-in animation
+    const fadeSections = document.querySelectorAll('.fade-section');
+    function checkFade() {
+      fadeSections.forEach(section => {
+        const rect = section.getBoundingClientRect();
+        if(rect.top < window.innerHeight * 0.75) {
+          section.classList.add('visible');
+        }
+      });
+    }
+    window.addEventListener('scroll', checkFade);
+    window.addEventListener('load', checkFade);
+  </script>
 </body>
 </html>
