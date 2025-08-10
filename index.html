@@ -90,10 +90,6 @@
     .arch{display:grid;grid-template-columns:1.2fr 1fr;gap:22px;align-items:center}
     .arch-svg{background:linear-gradient(180deg,#0b110d,#0f1612);border:1px solid var(--line);border-radius:12px;padding:16px}
     svg{width:100%;height:auto;display:block}
-    /* bigger labels */
-    .arch-svg svg text{font-size:20px !important}
-    @media (max-width:980px){ .arch-svg svg text{font-size:22px !important} }
-    @media (max-width:520px){ .arch-svg svg text{font-size:23px !important} }
 
     /* roadmap + code */
     .step{position:relative;padding:20px;border-radius:12px;border:1px solid var(--line);background:linear-gradient(180deg,rgba(12,18,15,.85),rgba(9,14,11,.8))}
@@ -241,38 +237,47 @@ Auto-revert on: clean window + analyst approval</pre>
         </div>
         <div class="arch reveal">
           <div class="arch-svg">
+            <!-- Updated font-size=16 so labels stay inside boxes -->
             <svg viewBox="0 0 900 420" xmlns="http://www.w3.org/2000/svg">
               <defs>
                 <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
                   <stop offset="0%" stop-color="#28ff7c" stop-opacity="0.9"/><stop offset="100%" stop-color="#28ff7c" stop-opacity="0.25"/>
                 </linearGradient>
-                <filter id="glow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="6" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
-                <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L10,3 L0,6 z" fill="#28ff7c" opacity="0.9"/></marker>
+                <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+                  <feGaussianBlur stdDeviation="6" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+                </filter>
+                <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+                  <path d="M0,0 L10,3 L0,6 z" fill="#28ff7c" opacity="0.9"/>
+                </marker>
               </defs>
               <rect x="10" y="10" width="880" height="400" rx="12" fill="#0c120e" stroke="rgba(255,255,255,.08)"/>
 
+              <!-- Top row -->
               <rect x="60" y="80" width="250" height="90" rx="10" fill="#0e1511" stroke="#2cfb7b" opacity="0.5"/>
-              <text x="75" y="120" fill="#c9f5db" font-family="monospace" font-size="14">Suricata DPI + NFQUEUE</text>
+              <text x="75" y="120" fill="#c9f5db" font-family="monospace" font-size="16">Suricata DPI + NFQUEUE</text>
 
               <rect x="335" y="70" width="230" height="110" rx="10" fill="#0e1511" stroke="#2cfb7b" opacity="0.5"/>
-              <text x="350" y="112" fill="#c9f5db" font-family="monospace" font-size="14">ML Classifier &amp; Policy</text>
-              <text x="350" y="132" fill="#c9f5db" font-family="monospace" font-size="14">Thresholds &amp; Explain</text>
+              <text x="350" y="112" fill="#c9f5db" font-family="monospace" font-size="16">ML Classifier &amp; Policy</text>
+              <text x="350" y="132" fill="#c9f5db" font-family="monospace" font-size="16">Thresholds &amp; Explain</text>
 
               <rect x="595" y="80" width="250" height="90" rx="10" fill="#0e1511" stroke="#2cfb7b" opacity="0.5"/>
-              <text x="610" y="120" fill="#c9f5db" font-family="monospace" font-size="14">Rule Injection</text>
+              <text x="610" y="120" fill="#c9f5db" font-family="monospace" font-size="16">Rule Injection</text>
 
+              <!-- connecting lines -->
               <path d="M310 125 L335 125" stroke="url(#g)" stroke-width="2" filter="url(#glow)" marker-end="url(#arrow)"/>
               <path d="M565 125 L595 125" stroke="url(#g)" stroke-width="2" filter="url(#glow)" marker-end="url(#arrow)"/>
 
+              <!-- Outputs -->
               <rect x="130" y="230" width="200" height="70" rx="10" fill="#0e1511" stroke="#2cfb7b" opacity="0.5"/>
-              <text x="150" y="270" fill="#c9f5db" font-family="monospace" font-size="14">Slack / Email</text>
+              <text x="150" y="270" fill="#c9f5db" font-family="monospace" font-size="16">Slack / Email</text>
 
               <rect x="360" y="230" width="200" height="70" rx="10" fill="#0e1511" stroke="#2cfb7b" opacity="0.5"/>
-              <text x="377" y="270" fill="#c9f5db" font-family="monospace" font-size="14">SIEM / JSON</text>
+              <text x="377" y="270" fill="#c9f5db" font-family="monospace" font-size="16">SIEM / JSON</text>
 
               <rect x="590" y="230" width="200" height="70" rx="10" fill="#0e1511" stroke="#2cfb7b" opacity="0.5"/>
-              <text x="612" y="270" fill="#c9f5db" font-family="monospace" font-size="14">GhostChain Sync</text>
+              <text x="612" y="270" fill="#c9f5db" font-family="monospace" font-size="16">GhostChain Sync</text>
 
+              <!-- down arrows -->
               <path d="M450 180 L450 230" stroke="url(#g)" stroke-width="2" filter="url(#glow)" marker-end="url(#arrow)"/>
               <path d="M210 170 L210 230" stroke="url(#g)" stroke-width="2" filter="url(#glow)" marker-end="url(#arrow)"/>
               <path d="M690 170 L690 230" stroke="url(#g)" stroke-width="2" filter="url(#glow)" marker-end="url(#arrow)"/>
