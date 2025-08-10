@@ -78,8 +78,27 @@
     .nav-inner{ max-width: var(--maxw); margin:0 auto; display:flex; align-items:center; justify-content:space-between; padding: 14px 20px; }
     .brand{ font-weight:800; letter-spacing:.02em; display:flex; gap:.6rem; align-items:center; }
     .brand .dot{ width:10px; height:10px; border-radius:999px; background:var(--accent); box-shadow:0 0 12px var(--accent); }
-    .nav-links a{ color:var(--fg); text-decoration:none; margin-left:1.2rem; opacity:.9 }
+    .nav-links{ display:flex; align-items:center; gap:1.2rem; }
+    .nav-links a{ color:var(--fg); text-decoration:none; opacity:.9 }
     .nav-links a:hover{ opacity:1; text-decoration:underline; }
+
+    /* Hamburger (mobile) */
+    .hamburger{
+      display:none; width:38px; height:34px; border:1px solid var(--line); border-radius:10px;
+      background:rgba(255,255,255,.02); align-items:center; justify-content:center; cursor:pointer;
+    }
+    .hamburger span{ display:block; width:18px; height:2px; background:#cfe9d8; position:relative; }
+    .hamburger span::before, .hamburger span::after{
+      content:""; position:absolute; left:0; width:18px; height:2px; background:#cfe9d8;
+    }
+    .hamburger span::before{ top:-6px; }
+    .hamburger span::after { top:6px; }
+
+    .mobile-menu{
+      display:none; flex-direction:column; padding:10px 20px 16px; gap:10px; border-top:1px solid var(--line);
+      background: rgba(5,8,6,0.7); backdrop-filter: blur(10px);
+    }
+    .mobile-menu a{ padding:10px 0; }
 
     /* Buttons */
     .btn{ display:inline-flex; align-items:center; gap:.5rem; border:none; cursor:pointer; font-weight:700;
@@ -105,14 +124,13 @@
     .shot-frame{ aspect-ratio: 16/10; width:100%; border-radius:12px;
       background:linear-gradient(180deg,#0b100d,#0e1511); border:1px solid var(--line);
       position:relative; overflow:hidden; display:flex; }
-    .shot-title{ position:absolute; top:10px; left:12px; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; color:#86f4b6; font-size:.85rem; opacity:.9 }
 
     /* --- DASHBOARD MOCK --- */
     .mock { display:grid; grid-template-columns: 200px 1fr; width:100%; }
     .mock-sidebar{
       border-right:1px solid var(--line);
       background:linear-gradient(180deg,#0c120e,#0f1612);
-      padding:14px 10px; display:flex; flex-direction:column; gap:8px;
+      padding:14px 10px; display:flex; flex-direction:column; gap:8px; min-width:160px;
     }
     .mock-logo{
       color:#9ff7c7; font-weight:800; letter-spacing:.06em; font-size:.9rem;
@@ -123,20 +141,20 @@
     .mock-link:hover{ opacity:1; background:rgba(40,255,124,.07); }
     .mock-link.active{ background:rgba(40,255,124,.12); color:#e5fff1; border:1px solid rgba(40,255,124,.22); }
 
-    .mock-main{ display:flex; flex-direction:column; gap:12px; padding:12px; }
+    .mock-main{ display:flex; flex-direction:column; gap:12px; padding:12px; min-width:0; }
     .mock-topbar{
       display:flex; align-items:center; justify-content:space-between;
       padding:10px 12px; border:1px solid var(--line); border-radius:10px;
       background:rgba(255,255,255,.02);
     }
-    .mock-topbar .search{ opacity:.8; font-size:.9rem; color:#bfe9cf; }
-    .mock-topbar .status{ display:flex; gap:10px; }
+    .mock-topbar .search{ opacity:.8; font-size:.9rem; color:#bfe9cf; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+    .mock-topbar .status{ display:flex; gap:10px; flex-wrap:wrap; }
     .chip{ font-size:.75rem; padding:6px 9px; border-radius:999px; border:1px solid rgba(40,255,124,.3);
-      background:rgba(40,255,124,.07); color:#c9f5db; }
+      background:rgba(40,255,124,.07); color:#c9f5db; white-space:nowrap; }
 
     .mock-grid{ display:grid; grid-template-columns: 1fr 1fr; gap:12px; }
     .mock-card{
-      border:1px solid var(--line); border-radius:10px; background:rgba(255,255,255,.02); padding:12px;
+      border:1px solid var(--line); border-radius:10px; background:rgba(255,255,255,.02); padding:12px; min-width:0;
     }
     .mock-card h4{ margin:0 0 8px 0; font-size:.95rem; color:#d7f1e3; }
     .mock-mini{ display:grid; grid-template-columns: repeat(3,1fr); gap:12px; }
@@ -156,10 +174,10 @@
 
     /* table */
     .table{
-      border:1px solid var(--line); border-radius:8px; overflow:hidden; background:rgba(10,17,13,.55);
+      border:1px solid var(--line); border-radius:8px; overflow:auto; background:rgba(10,17,13,.55);
       font-size:.9rem;
     }
-    .thead, .trow{ display:grid; grid-template-columns: 1.2fr 1fr 1fr .7fr .8fr; }
+    .thead, .trow{ display:grid; grid-template-columns: 1.2fr 1fr 1fr .7fr .8fr; min-width:650px; }
     .thead{ background:rgba(40,255,124,.10); color:#cfe9d8; font-weight:700; }
     .tcell{ padding:8px 10px; border-bottom:1px solid var(--line); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
     .conf{ color:#9ff7c7; }
@@ -167,9 +185,9 @@
     .green-dot{ width:8px; height:8px; border-radius:50%; background:var(--accent); box-shadow:0 0 6px var(--accent); display:inline-block; }
 
     /* Trust row */
-    .trust{ max-width:var(--maxw); margin:10px auto 0; padding: 0 20px 24px; display:flex; gap:24px; align-items:center; flex-wrap:wrap; justify-content:space-between; opacity:.9 }
+    .trust{ max-width:var(--maxw); margin:10px auto 0; padding: 0 20px 24px; display:flex; gap:16px; align-items:center; flex-wrap:wrap; justify-content:space-between; opacity:.9 }
     .trust small{ color:var(--muted); letter-spacing:.08em; text-transform:uppercase; }
-    .trust-logos{ display:flex; gap:16px; align-items:center; flex-wrap:wrap; }
+    .trust-logos{ display:flex; gap:10px; align-items:center; flex-wrap:wrap; }
     .pill{ display:inline-block; padding:6px 12px; border:1px solid rgba(255,255,255,.14); border-radius:999px; color:#c9e9d7; font-size:.82rem; line-height:1; background:rgba(40,255,124,.06) }
 
     /* Sections */
@@ -178,12 +196,6 @@
 
     .grid-3{ display:grid; gap:18px; grid-template-columns: repeat(3, 1fr); }
     .grid-2{ display:grid; gap:22px; grid-template-columns: repeat(2, 1fr); }
-    @media (max-width: 980px){
-      .hero-inner{ grid-template-columns:1fr; }
-      .grid-3{ grid-template-columns:1fr; }
-      .grid-2{ grid-template-columns:1fr; }
-      .mock{ grid-template-columns: 1fr; }
-    }
 
     .panel{ background:var(--panel-2); border:1px solid var(--line); border-radius:var(--radius); padding:22px; box-shadow: var(--shadow); }
 
@@ -198,7 +210,6 @@
 
     /* Architecture */
     .arch{ display:grid; grid-template-columns: 1.2fr 1fr; gap:22px; align-items:center; }
-    @media (max-width: 980px){ .arch{ grid-template-columns:1fr; } }
     .arch-svg{ background:linear-gradient(180deg,#0b110d,#0f1612); border:1px solid var(--line); border-radius:12px; padding:16px; }
     svg{ width:100%; height:auto; display:block; }
 
@@ -223,6 +234,33 @@
     /* Reveals */
     .reveal{ opacity:0; transform: translateY(24px); transition: opacity .7s ease, transform .7s ease; will-change: opacity, transform; }
     .reveal.visible{ opacity:1; transform:none; }
+
+    /* ---------- MOBILE BREAKPOINTS ---------- */
+    @media (max-width: 980px){
+      .hero-inner{ grid-template-columns:1fr; padding-top:56px; gap:22px; }
+      .nav-links{ display:none; }
+      .hamburger{ display:flex; }
+      .mobile-menu.open{ display:flex; }
+      .grid-3{ grid-template-columns:1fr; }
+      .grid-2{ grid-template-columns:1fr; }
+      .arch{ grid-template-columns:1fr; }
+      .mock{ grid-template-columns: 1fr; }
+      .mock-sidebar{ flex-direction:row; overflow:auto; border-right:none; border-bottom:1px solid var(--line); gap:6px; }
+      .mock-main{ padding:10px; }
+      .mock-grid{ grid-template-columns:1fr; }
+      .mock-mini{ grid-template-columns:1fr; }
+      .chart{ height:120px; }
+      .hero-shot{ padding:12px; }
+      .pill{ font-size:.78rem; padding:6px 10px; }
+      .trust{ padding-bottom:14px; }
+    }
+
+    @media (max-width: 520px){
+      .hero-inner{ padding: 58px 16px 30px; }
+      h1{ font-size: 1.9rem; }
+      .sub{ font-size: 1rem; }
+      .btn{ padding:9px 14px; }
+    }
   </style>
 </head>
 <body>
@@ -237,13 +275,29 @@
         <span class="dot"></span>
         <span>GhostWall™</span>
       </div>
+
+      <!-- Desktop links -->
       <div class="nav-links">
         <a href="#features">Features</a>
         <a href="#architecture">Architecture</a>
         <a href="#roadmap">Roadmap</a>
         <a href="#trust">Trust</a>
-        <a href="#contact" class="btn btn--nav" style="margin-left:16px;">Request a Demo</a>
+        <a href="#contact" class="btn btn--nav">Request a Demo</a>
       </div>
+
+      <!-- Mobile hamburger -->
+      <button class="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">
+        <span></span>
+      </button>
+    </div>
+
+    <!-- Mobile menu -->
+    <div id="mobileMenu" class="mobile-menu">
+      <a href="#features">Features</a>
+      <a href="#architecture">Architecture</a>
+      <a href="#roadmap">Roadmap</a>
+      <a href="#trust">Trust</a>
+      <a href="#contact" class="btn btn--nav" style="width:max-content;">Request a Demo</a>
     </div>
   </nav>
 
@@ -261,9 +315,7 @@
 
       <div class="card hero-shot" aria-label="Product preview">
         <div class="shot-frame">
-          <div class="shot-title">GhostWall • Dashboard (mock)</div>
-
-          <!-- DASHBOARD MOCK -->
+          <!-- DASHBOARD MOCK (no label now) -->
           <div class="mock" aria-hidden="true">
             <aside class="mock-sidebar">
               <div class="mock-logo"><i></i> GHOSTWALL</div>
@@ -357,7 +409,6 @@
             </div> <!-- /mock-main -->
           </div>
           <!-- /DASHBOARD MOCK -->
-
         </div>
       </div>
     </div>
@@ -605,10 +656,22 @@ Confidence: 99.1% | Signature Shared: ✓</pre>
     <section aria-label="Call to action" class="wrap cta-band reveal" id="contact">
       <h3>See GhostWall in action</h3>
       <p>Request a private demo or join the early access waitlist.</p>
+
+      <!-- Option A: Google Form (current) -->
       <div style="display:flex; gap:10px; justify-content:center; flex-wrap:wrap;">
         <a class="btn" href="https://forms.gle/4YFZ5zAYBMaiYqea9" target="_blank" rel="noopener">Request Demo</a>
         <a class="btn" href="mailto:founder@ghostwall.org?subject=GhostWall%20—%20Early%20Access&body=Hi%20Devin%2C%0D%0A%0D%0AWe'd%20like%20to%20learn%20more%20about%20GhostWall." style="background:#aef3c8; color:#072114;">Email Devin</a>
       </div>
+
+      <!-- Option B: On-page capture (uncomment + wire /api/early-access) -->
+      <!--
+      <form id="earlyAccessForm" style="margin-top:14px; display:flex; gap:8px; justify-content:center; flex-wrap:wrap;">
+        <input id="eaEmail" type="email" placeholder="you@company.com" required
+               style="padding:10px 12px; border-radius:10px; border:1px solid var(--line); max-width:260px; width:100%; color:#06210f">
+        <button class="btn" type="submit">Join Early Access</button>
+      </form>
+      <div id="eaMsg" style="margin-top:8px; font-size:.95rem; color:#cfe9d8;"></div>
+      -->
       <p style="margin-top:10px; color:#cfe9d8">No spam. One email when it’s live.</p>
     </section>
   </main>
@@ -632,11 +695,44 @@ Confidence: 99.1% | Signature Shared: ✓</pre>
       }, { passive:true });
     }
 
+    // Hamburger toggle
+    const burger = document.querySelector('.hamburger');
+    const mobileMenu = document.getElementById('mobileMenu');
+    burger?.addEventListener('click', () => {
+      const open = mobileMenu.classList.toggle('open');
+      burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+
     // IntersectionObserver reveals
     const io = new IntersectionObserver((entries)=>{
       for(const e of entries){ if(e.isIntersecting) e.target.classList.add('visible'); }
     }, { threshold: 0.12, rootMargin: '0px 0px -10% 0px' });
     document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+    // Early access form (enable if you uncomment the form)
+    /*
+    const form = document.getElementById('earlyAccessForm');
+    form?.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const email = (document.getElementById('eaEmail') as HTMLInputElement).value.trim();
+      const msg = document.getElementById('eaMsg');
+      try {
+        const res = await fetch('/api/early-access', {
+          method:'POST',
+          headers:{'Content-Type':'application/json'},
+          body: JSON.stringify({ email })
+        });
+        if(res.ok){
+          msg.textContent = '✅ Thanks! We’ll notify you for early access.';
+          form.reset();
+        } else {
+          msg.textContent = '⚠️ Something went wrong. You can also use the Google Form.';
+        }
+      } catch {
+        msg.textContent = '⚠️ Network error. Try the Google Form button above.';
+      }
+    });
+    */
   </script>
 </body>
 </html>
