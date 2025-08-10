@@ -4,12 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>GhostWall™ — AI-Native Network Defense</title>
-
-  <!-- SEO -->
   <meta name="description" content="GhostWall is an AI-native firewall that delivers real-time zero-day protection, autonomous response, and secure threat sharing across your network.">
   <link rel="canonical" href="https://ghostwall.org/">
-
-  <!-- Open Graph / Twitter -->
   <meta property="og:title" content="GhostWall™ — AI-Native Network Defense" />
   <meta property="og:description" content="Real-time zero-day protection. Autonomous response. Secure, distributed threat memory." />
   <meta property="og:type" content="website" />
@@ -21,249 +17,158 @@
   <meta name="twitter:image" content="/og.jpg" />
   <meta name="theme-color" content="#0a0f0a" />
   <link rel="icon" href="/favicon.ico" />
-
   <style>
     :root{
-      --bg: #050607;
-      --panel: rgba(10, 14, 12, 0.85);
-      --panel-2: rgba(15, 18, 17, 0.7);
-      --fg: #e8f0e8;
-      --muted: #aab4aa;
-      --accent: #28ff7c;
-      --accent-2: #12d45d;
-      --accent-nav: #1fc868;
-      --ring: rgba(40, 255, 124, 0.18);
-      --shadow: 0 2px 30px var(--ring);
-      --maxw: 1200px;
-      --radius: 16px;
-      --line: rgba(255,255,255,.08);
+      --bg:#050607; --panel:rgba(10,14,12,.85); --panel-2:rgba(15,18,17,.7);
+      --fg:#e8f0e8; --muted:#aab4aa; --accent:#28ff7c; --accent-2:#12d45d; --accent-nav:#1fc868;
+      --ring:rgba(40,255,124,.18); --shadow:0 2px 30px var(--ring); --maxw:1200px; --radius:16px; --line:rgba(255,255,255,.08);
+    }
+    *,*::before,*::after{box-sizing:border-box}
+    html,body{height:100%}
+    html{scroll-behavior:smooth}
+    @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+    body{margin:0;color:var(--fg);background:var(--bg);font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial,"Noto Sans";-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;overflow-x:hidden}
+
+    /* background */
+    .bg-wrap{position:fixed;inset:0;z-index:-1;overflow:hidden}
+    .bg-grad{position:absolute;inset:-20%;background:
+      radial-gradient(60% 60% at 30% 20%, rgba(40,255,124,.14), transparent),
+      radial-gradient(50% 50% at 70% 80%, rgba(112,255,184,.10), transparent),
+      radial-gradient(40% 40% at 90% 10%, rgba(40,255,124,.06), transparent),
+      linear-gradient(180deg,#050607 0%,#090c0a 100%);filter:saturate(105%);transition:transform .2s ease-out}
+    .bg-grid{position:absolute;inset:0;opacity:.06;background-image:linear-gradient(transparent 95%, #9dfdc5 95%),linear-gradient(90deg, transparent 95%, #9dfdc5 95%);background-size:22px 22px}
+
+    /* nav */
+    nav{position:sticky;top:0;z-index:50;background:rgba(5,8,6,.55);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+    .nav-inner{max-width:var(--maxw);margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:14px 20px}
+    .brand{font-weight:800;letter-spacing:.02em;display:flex;gap:.6rem;align-items:center}
+    .brand .dot{width:10px;height:10px;border-radius:999px;background:var(--accent);box-shadow:0 0 12px var(--accent)}
+    .nav-links{display:flex;align-items:center;gap:1.2rem}
+    .nav-links a{color:var(--fg);text-decoration:none;opacity:.9}
+    .nav-links a:hover{opacity:1;text-decoration:underline}
+
+    /* hamburger */
+    .hamburger{display:none;width:38px;height:34px;border:1px solid var(--line);border-radius:10px;background:rgba(255,255,255,.02);align-items:center;justify-content:center;cursor:pointer}
+    .hamburger span{display:block;width:18px;height:2px;background:#cfe9d8;position:relative}
+    .hamburger span::before,.hamburger span::after{content:"";position:absolute;left:0;width:18px;height:2px;background:#cfe9d8}
+    .hamburger span::before{top:-6px}.hamburger span::after{top:6px}
+    .mobile-menu{display:none;flex-direction:column;padding:10px 20px 16px;gap:10px;border-top:1px solid var(--line);background:rgba(5,8,6,.7);backdrop-filter:blur(10px)}
+    .mobile-menu a{color:var(--fg);text-decoration:none;opacity:.95}
+    .mobile-menu a:hover{text-decoration:underline}
+
+    /* buttons */
+    .btn{display:inline-flex;align-items:center;gap:.5rem;border:none;cursor:pointer;font-weight:700;color:#06210f;background:var(--accent);padding:10px 16px;border-radius:10px;box-shadow:0 6px 30px rgba(40,255,124,.22);transition:transform .04s ease, background .18s ease}
+    .btn:hover{background:var(--accent-2)} .btn:active{transform:translateY(1px)}
+    .btn--nav{background:var(--accent-nav);box-shadow:none;color:#06210f}.btn--nav:hover{background:#19b85d}
+
+    /* hero */
+    header.hero{position:relative}
+    .hero-inner{max-width:var(--maxw);margin:0 auto;padding:70px 20px 40px;display:grid;grid-template-columns:1.2fr 1fr;gap:42px;align-items:center}
+    .kicker{color:#a2eebf;font-weight:700;font-size:.95rem;letter-spacing:.12em;text-transform:uppercase}
+    h1{font-size:clamp(2rem,5.5vw,4rem);line-height:1.05;margin:.4rem 0 1rem}
+    .sub{color:var(--muted);font-size:clamp(1rem,2.1vw,1.25rem);max-width:56ch}
+    .hero-cta{display:flex;gap:12px;align-items:center;margin-top:20px;flex-wrap:wrap}
+    .hero-note{font-size:.92rem;color:#cfe9d8;opacity:.9}
+    .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow)}
+    .hero-shot{padding:20px}
+    .shot-frame{aspect-ratio:16/10;width:100%;border-radius:12px;background:linear-gradient(180deg,#0b100d,#0e1511);border:1px solid var(--line);position:relative;overflow:hidden;display:flex}
+
+    /* ---- DASHBOARD MOCK ---- */
+    .mock{display:grid;grid-template-columns:minmax(140px,26%) minmax(0,1fr);width:100%;min-width:0} /* desktop: flexible, never forces overflow */
+    .mock-sidebar{border-right:1px solid var(--line);background:linear-gradient(180deg,#0c120e,#0f1612);padding:14px 10px;display:flex;flex-direction:column;gap:8px;min-width:140px}
+    .mock-logo{color:#9ff7c7;font-weight:800;letter-spacing:.06em;font-size:.9rem;display:flex;align-items:center;gap:.45rem;margin-bottom:6px}
+    .mock-logo i{width:8px;height:8px;background:var(--accent);border-radius:50%;box-shadow:0 0 8px var(--accent)}
+    .mock-link{color:#cdebd9;font-size:.9rem;padding:8px 10px;border-radius:8px;text-decoration:none;opacity:.9}
+    .mock-link:hover{opacity:1;background:rgba(40,255,124,.07)}
+    .mock-link.active{background:rgba(40,255,124,.12);color:#e5fff1;border:1px solid rgba(40,255,124,.22)}
+
+    .mock-main{display:flex;flex-direction:column;gap:12px;padding:12px;min-width:0}
+    .mock-topbar{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:10px 12px;border:1px solid var(--line);border-radius:10px;background:rgba(255,255,255,.02);flex-wrap:wrap}
+    .mock-topbar .search{flex:1;min-width:180px;opacity:.8;font-size:.9rem;color:#bfe9cf;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+    .mock-topbar .status{display:flex;gap:10px;flex-wrap:wrap;flex-shrink:0}
+    .chip{font-size:.75rem;padding:6px 9px;border-radius:999px;border:1px solid rgba(40,255,124,.3);background:rgba(40,255,124,.07);color:#c9f5db;white-space:nowrap}
+
+    .mock-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;min-width:0}
+    .mock-card{border:1px solid var(--line);border-radius:10px;background:rgba(255,255,255,.02);padding:12px;min-width:0}
+    .mock-card h4{margin:0 0 8px 0;font-size:.95rem;color:#d7f1e3}
+    .mock-mini{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+
+    .chart{height:160px;border:1px solid var(--line);border-radius:8px;overflow:hidden;display:flex;align-items:flex-end;gap:8px;padding:10px;background:rgba(10,17,13,.42)}
+    .bar{width:12px;border-radius:3px;background:linear-gradient(180deg,rgba(40,255,124,.85),rgba(40,255,124,.28));transform-origin:bottom;animation:grow 3.8s ease-in-out infinite}
+    .bar:nth-child(3n){animation-delay:.3s}.bar:nth-child(2n){animation-delay:.6s}
+    @keyframes grow{0%,100%{transform:scaleY(.35)}50%{transform:scaleY(1)}}
+
+    .table{border:1px solid var(--line);border-radius:8px;overflow:auto;background:rgba(10,17,13,.55);font-size:.9rem;max-width:100%;min-width:0}
+    .thead,.trow{display:grid;grid-template-columns:1.2fr 1fr 1fr .7fr .8fr;min-width:560px} /* was 650 */
+    .thead{background:rgba(40,255,124,.10);color:#cfe9d8;font-weight:700}
+    .tcell{padding:8px 10px;border-bottom:1px solid var(--line);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .conf{color:#9ff7c7}.action{color:#d7f1e3}.green-dot{width:8px;height:8px;border-radius:50%;background:var(--accent);box-shadow:0 0 6px var(--accent);display:inline-block}
+
+    /* trust band */
+    .trust-wrap{max-width:var(--maxw);margin:10px auto 0;padding:0 20px 24px}
+    .trust{display:flex;gap:20px;align-items:center;flex-wrap:wrap;justify-content:space-between;opacity:.95;background:rgba(40,255,124,.05);border:1px solid var(--line);border-radius:12px;padding:16px 16px}
+    .trust .label{color:#cfe9d8;letter-spacing:.1em;text-transform:uppercase;font-weight:800;font-size:1rem}
+    .trust-logos{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+    .pill{display:inline-block;padding:8px 14px;border:1px solid rgba(255,255,255,.14);border-radius:999px;color:#c9e9d7;font-size:.9rem;line-height:1;background:rgba(40,255,124,.08)}
+
+    /* sections */
+    section{padding:72px 20px}
+    .wrap{max-width:var(--maxw);margin:0 auto}
+    .grid-3{display:grid;gap:18px;grid-template-columns:repeat(3,1fr)}
+    .grid-2{display:grid;gap:22px;grid-template-columns:repeat(2,1fr)}
+    .panel{background:var(--panel-2);border:1px solid var(--line);border-radius:var(--radius);padding:22px;box-shadow:var(--shadow)}
+    .feat{padding:22px;display:flex;gap:16px;border-radius:var(--radius);background:linear-gradient(180deg,rgba(14,21,17,.8),rgba(11,17,14,.7));border:1px solid var(--line)}
+    .feat i{display:inline-flex;width:32px;height:32px;border-radius:8px;background:rgba(40,255,124,.18);border:1px solid rgba(40,255,124,.3);align-items:center;justify-content:center;font-style:normal;font-weight:900;color:#9ff7c7}
+    .feat h3{margin:2px 0 6px;font-size:1.05rem}.feat p{margin:0;color:var(--muted)}
+    .section-title{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:18px;gap:12px}
+    .section-title h2{font-size:clamp(1.4rem,3.5vw,2rem);margin:0}.section-title p{margin:0;color:var(--muted)}
+
+    /* architecture */
+    .arch{display:grid;grid-template-columns:1.2fr 1fr;gap:22px;align-items:center}
+    .arch-svg{background:linear-gradient(180deg,#0b110d,#0f1612);border:1px solid var(--line);border-radius:12px;padding:16px}
+    svg{width:100%;height:auto;display:block}
+
+    /* roadmap */
+    .step{position:relative;padding:20px;border-radius:12px;border:1px solid var(--line);background:linear-gradient(180deg,rgba(12,18,15,.85),rgba(9,14,11,.8))}
+    .step h4{margin:0 0 8px;letter-spacing:.08em;text-transform:uppercase;font-size:.95rem;color:#b9f5cf}
+    .mono{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+    pre{margin:10px 0 0;padding:12px 14px;border-radius:10px;background:#0a110d;border:1px solid rgba(40,255,124,.22);color:#9ff7c7;font-size:.92rem;white-space:pre-wrap;word-break:break-word}
+
+    /* cta + footer */
+    .badges{display:flex;flex-wrap:wrap;gap:10px}
+    .badge{border:1px solid rgba(255,255,255,.12);border-radius:999px;padding:8px 12px;font-size:.85rem;color:#d7f1e3;background:rgba(40,255,124,.07)}
+    .cta-band{text-align:center;padding:60px 20px;margin:10px auto;background:linear-gradient(180deg,rgba(19,27,22,.8),rgba(12,18,15,.7));border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow)}
+    .cta-band h3{margin:0 0 10px;font-size:clamp(1.2rem,3.2vw,1.8rem)}
+    .cta-band p{margin:0 0 16px;color:var(--muted)}
+    footer{padding:24px 20px 60px;border-top:1px solid var(--line);color:#b9c9bb;font-size:.95rem}
+    .reveal{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s ease;will-change:opacity,transform}
+    .reveal.visible{opacity:1;transform:none}
+
+    /* mid-desktop guard: keep mock comfy */
+    @media (max-width:1280px){
+      .mock{grid-template-columns:minmax(130px,30%) minmax(0,1fr)}
+      .mock-grid{grid-template-columns:1fr} /* stack inside mock */
     }
 
-    *, *::before, *::after { box-sizing: border-box; }
-    html, body { height: 100%; }
-    html { scroll-behavior: smooth; }
-    @media (prefers-reduced-motion: reduce){ html{ scroll-behavior: auto; } }
-
-    body{
-      margin:0; color:var(--fg); background: var(--bg);
-      font-family: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans";
-      -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
-      overflow-x:hidden;
+    /* mobile */
+    @media (max-width:980px){
+      .hero-inner{grid-template-columns:1fr;padding-top:56px;gap:22px}
+      .nav-links{display:none}.hamburger{display:flex}.mobile-menu.open{display:flex}
+      .grid-3,.grid-2{grid-template-columns:1fr}
+      .arch{grid-template-columns:1fr}
+      .hero-shot{padding:12px}.shot-frame{aspect-ratio:auto}
+      .mock{grid-template-columns:1fr;overflow:hidden}
+      .mock-sidebar{flex-direction:row;overflow-x:auto;border-right:none;border-bottom:1px solid var(--line);gap:6px;min-width:0}
+      .mock-main{padding:10px}.mock-grid{grid-template-columns:1fr}.mock-mini{grid-template-columns:1fr}
+      .chart{height:120px}.pill{font-size:.82rem;padding:7px 12px}
+      .arch-svg svg text{font-size:16px!important}
+      .trust{padding:14px}
+      .trust .label{font-size:.95rem}
     }
-
-    /* Background */
-    .bg-wrap{ position:fixed; inset:0; z-index:-1; overflow:hidden; }
-    .bg-grad{ position:absolute; inset:-20%;
-      background:
-        radial-gradient(60% 60% at 30% 20%, rgba(40,255,124,0.14), transparent),
-        radial-gradient(50% 50% at 70% 80%, rgba(112,255,184,0.10), transparent),
-        radial-gradient(40% 40% at 90% 10%, rgba(40,255,124,0.06), transparent),
-        linear-gradient(180deg, #050607 0%, #090c0a 100%);
-      filter: saturate(105%);
-      transition: transform .2s ease-out;
-    }
-    .bg-grid{ position:absolute; inset:0; opacity:0.06;
-      background-image:
-        linear-gradient(transparent 95%, #9dfdc5 95%),
-        linear-gradient(90deg, transparent 95%, #9dfdc5 95%);
-      background-size: 22px 22px;
-    }
-
-    /* Nav */
-    nav{
-      position:sticky; top:0; z-index:50; background: rgba(5,8,6,0.55); backdrop-filter: blur(10px);
-      border-bottom: 1px solid var(--line);
-    }
-    .nav-inner{ max-width: var(--maxw); margin:0 auto; display:flex; align-items:center; justify-content:space-between; padding: 14px 20px; }
-    .brand{ font-weight:800; letter-spacing:.02em; display:flex; gap:.6rem; align-items:center; }
-    .brand .dot{ width:10px; height:10px; border-radius:999px; background:var(--accent); box-shadow:0 0 12px var(--accent); }
-    .nav-links{ display:flex; align-items:center; gap:1.2rem; }
-    .nav-links a{ color:var(--fg); text-decoration:none; opacity:.9 }
-    .nav-links a:hover{ opacity:1; text-decoration:underline; }
-
-    /* Hamburger (mobile) */
-    .hamburger{
-      display:none; width:38px; height:34px; border:1px solid var(--line); border-radius:10px;
-      background:rgba(255,255,255,.02); align-items:center; justify-content:center; cursor:pointer;
-    }
-    .hamburger span{ display:block; width:18px; height:2px; background:#cfe9d8; position:relative; }
-    .hamburger span::before, .hamburger span::after{
-      content:""; position:absolute; left:0; width:18px; height:2px; background:#cfe9d8;
-    }
-    .hamburger span::before{ top:-6px; }
-    .hamburger span::after { top:6px; }
-
-    .mobile-menu{
-      display:none; flex-direction:column; padding:10px 20px 16px; gap:10px; border-top:1px solid var(--line);
-      background: rgba(5,8,6,0.7); backdrop-filter: blur(10px);
-    }
-    .mobile-menu a{ color:var(--fg); text-decoration:none; opacity:.95; }
-    .mobile-menu a:hover{ text-decoration:underline; }
-
-    /* Buttons */
-    .btn{ display:inline-flex; align-items:center; gap:.5rem; border:none; cursor:pointer; font-weight:700;
-      color:#06210f; background:var(--accent); padding:10px 16px; border-radius:10px;
-      box-shadow:0 6px 30px rgba(40,255,124,.22); transition: transform .04s ease, background .18s ease; }
-    .btn:hover{ background:var(--accent-2); }
-    .btn:active{ transform: translateY(1px); }
-    .btn--nav{ background: var(--accent-nav); box-shadow:none; color:#06210f; }
-    .btn--nav:hover{ background:#19b85d; }
-
-    /* Hero */
-    header.hero{ position:relative; }
-    .hero-inner{ max-width:var(--maxw); margin:0 auto; padding: 70px 20px 40px;
-      display:grid; grid-template-columns: 1.2fr 1fr; gap:42px; align-items:center; }
-    .kicker{ color:#a2eebf; font-weight:700; font-size:.95rem; letter-spacing:.12em; text-transform:uppercase; }
-    h1{ font-size: clamp(2.0rem, 5.5vw, 4rem); line-height:1.05; margin:.4rem 0 1rem; }
-    .sub{ color:var(--muted); font-size: clamp(1rem, 2.1vw, 1.25rem); max-width:56ch; }
-    .hero-cta{ display:flex; gap:12px; align-items:center; margin-top:20px; flex-wrap:wrap; }
-    .hero-note{ font-size:.92rem; color:#cfe9d8; opacity:.9 }
-
-    .card{ background:var(--panel); border:1px solid var(--line); border-radius:var(--radius); box-shadow: var(--shadow); }
-    .hero-shot{ padding:20px; }
-    .shot-frame{ aspect-ratio: 16/10; width:100%; border-radius:12px;
-      background:linear-gradient(180deg,#0b100d,#0e1511); border:1px solid var(--line);
-      position:relative; overflow:hidden; display:flex; }
-
-    /* --- DASHBOARD MOCK --- */
-    .mock { display:grid; grid-template-columns: 200px 1fr; width:100%; /* desktop: visible (no clipping) */ }
-    .mock-sidebar{
-      border-right:1px solid var(--line);
-      background:linear-gradient(180deg,#0c120e,#0f1612);
-      padding:14px 10px; display:flex; flex-direction:column; gap:8px; min-width:180px;
-    }
-    .mock-logo{
-      color:#9ff7c7; font-weight:800; letter-spacing:.06em; font-size:.9rem;
-      display:flex; align-items:center; gap:.45rem; margin-bottom:6px;
-    }
-    .mock-logo i{ width:8px; height:8px; background:var(--accent); border-radius:50%; box-shadow:0 0 8px var(--accent);}
-    .mock-link{ color:#cdebd9; font-size:.9rem; padding:8px 10px; border-radius:8px; text-decoration:none; opacity:.9; }
-    .mock-link:hover{ opacity:1; background:rgba(40,255,124,.07); }
-    .mock-link.active{ background:rgba(40,255,124,.12); color:#e5fff1; border:1px solid rgba(40,255,124,.22); }
-
-    .mock-main{ display:flex; flex-direction:column; gap:12px; padding:12px; min-width:0; }
-    .mock-topbar{
-      display:flex; align-items:center; justify-content:space-between;
-      padding:10px 12px; border:1px solid var(--line); border-radius:10px;
-      background:rgba(255,255,255,.02);
-    }
-    /* desktop: give search flexible space; keep status intact */
-    .mock-topbar .search{ flex:1; min-width:180px; opacity:.8; font-size:.9rem; color:#bfe9cf; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
-    .mock-topbar .status{ display:flex; gap:10px; flex-wrap:wrap; flex-shrink:0; }
-    .chip{ font-size:.75rem; padding:6px 9px; border-radius:999px; border:1px solid rgba(40,255,124,.3);
-      background:rgba(40,255,124,.07); color:#c9f5db; white-space:nowrap; }
-
-    .mock-grid{ display:grid; grid-template-columns: 1fr 1fr; gap:12px; }
-    .mock-card{
-      border:1px solid var(--line); border-radius:10px; background:rgba(255,255,255,.02); padding:12px; min-width:0;
-    }
-    .mock-card h4{ margin:0 0 8px 0; font-size:.95rem; color:#d7f1e3; }
-    .mock-mini{ display:grid; grid-template-columns: repeat(3,1fr); gap:12px; }
-
-    /* chart */
-    .chart{
-      height:160px; border:1px solid var(--line); border-radius:8px; overflow:hidden;
-      display:flex; align-items:flex-end; gap:8px; padding:10px; background:rgba(10,17,13,.42);
-    }
-    .bar{
-      width:12px; border-radius:3px; background:linear-gradient(180deg, rgba(40,255,124,.85), rgba(40,255,124,.28));
-      transform-origin: bottom;
-      animation: grow 3.8s ease-in-out infinite;
-    }
-    .bar:nth-child(3n){ animation-delay:.3s }
-    .bar:nth-child(2n){ animation-delay:.6s }
-    @keyframes grow { 0%,100%{ transform: scaleY(.35);} 50%{ transform: scaleY(1);} }
-
-    /* table */
-    .table{
-      border:1px solid var(--line); border-radius:8px; overflow:auto; background:rgba(10,17,13,.55);
-      font-size:.9rem; max-width:100%;
-    }
-    .thead, .trow{ display:grid; grid-template-columns: 1.2fr 1fr 1fr .7fr .8fr; min-width:650px; }
-    .thead{ background:rgba(40,255,124,.10); color:#cfe9d8; font-weight:700; }
-    .tcell{ padding:8px 10px; border-bottom:1px solid var(--line); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
-    .conf{ color:#9ff7c7; }
-    .action{ color:#d7f1e3; }
-    .green-dot{ width:8px; height:8px; border-radius:50%; background:var(--accent); box-shadow:0 0 6px var(--accent); display:inline-block; }
-
-    /* Trust row */
-    .trust{ max-width:var(--maxw); margin:10px auto 0; padding: 0 20px 24px; display:flex; gap:16px; align-items:center; flex-wrap:wrap; justify-content:space-between; opacity:.9 }
-    .trust small{ color:var(--muted); letter-spacing:.08em; text-transform:uppercase; }
-    .trust-logos{ display:flex; gap:10px; align-items:center; flex-wrap:wrap; }
-    .pill{ display:inline-block; padding:6px 12px; border:1px solid rgba(255,255,255,.14); border-radius:999px; color:#c9e9d7; font-size:.82rem; line-height:1; background:rgba(40,255,124,.06) }
-
-    /* Sections */
-    section{ padding: 72px 20px; }
-    .wrap{ max-width:var(--maxw); margin:0 auto; }
-
-    .grid-3{ display:grid; gap:18px; grid-template-columns: repeat(3, 1fr); }
-    .grid-2{ display:grid; gap:22px; grid-template-columns: repeat(2, 1fr); }
-
-    .panel{ background:var(--panel-2); border:1px solid var(--line); border-radius:var(--radius); padding:22px; box-shadow: var(--shadow); }
-
-    .feat{ padding:22px; display:flex; gap:16px; border-radius:var(--radius); background: linear-gradient(180deg, rgba(14, 21, 17, 0.8), rgba(11, 17, 14, 0.7)); border:1px solid var(--line); }
-    .feat i{ display:inline-flex; width:32px; height:32px; border-radius:8px; background:rgba(40,255,124,.18); border:1px solid rgba(40,255,124,.3); align-items:center; justify-content:center; font-style:normal; font-weight:900; color:#9ff7c7; }
-    .feat h3{ margin:2px 0 6px; font-size:1.05rem }
-    .feat p{ margin:0; color:var(--muted) }
-
-    .section-title{ display:flex; align-items:flex-end; justify-content:space-between; margin-bottom:18px; gap:12px; }
-    .section-title h2{ font-size: clamp(1.4rem, 3.5vw, 2rem); margin:0 }
-    .section-title p{ margin:0; color:var(--muted) }
-
-    /* Architecture */
-    .arch{ display:grid; grid-template-columns: 1.2fr 1fr; gap:22px; align-items:center; }
-    .arch-svg{ background:linear-gradient(180deg,#0b110d,#0f1612); border:1px solid var(--line); border-radius:12px; padding:16px; }
-    svg{ width:100%; height:auto; display:block; }
-
-    /* Roadmap */
-    .step{ position:relative; padding:20px; border-radius:12px; border:1px solid var(--line); background:linear-gradient(180deg, rgba(12,18,15,.85), rgba(9,14,11,.8)); }
-    .step h4{ margin:0 0 8px; letter-spacing:.08em; text-transform:uppercase; font-size:.95rem; color:#b9f5cf }
-    .mono{ font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
-    pre{ margin:10px 0 0; padding:12px 14px; border-radius:10px; background:#0a110d; border:1px solid rgba(40,255,124,.22); color:#9ff7c7; font-size:.92rem; white-space:pre-wrap; word-break:break-word; }
-
-    /* Compliance */
-    .badges{ display:flex; flex-wrap:wrap; gap:10px; }
-    .badge{ border:1px solid rgba(255,255,255,.12); border-radius:999px; padding:8px 12px; font-size:.85rem; color:#d7f1e3; background:rgba(40,255,124,.07) }
-
-    /* CTA */
-    .cta-band{ text-align:center; padding:60px 20px; margin: 10px auto; background: linear-gradient(180deg, rgba(19,27,22,.8), rgba(12,18,15,.7)); border:1px solid var(--line); border-radius:var(--radius); box-shadow: var(--shadow); }
-    .cta-band h3{ margin:0 0 10px; font-size: clamp(1.2rem, 3.2vw, 1.8rem); }
-    .cta-band p{ margin:0 0 16px; color:var(--muted); }
-
-    /* Footer */
-    footer{ padding: 24px 20px 60px; border-top:1px solid var(--line); color:#b9c9bb; font-size:.95rem; }
-
-    .reveal{ opacity:0; transform: translateY(24px); transition: opacity .7s ease, transform .7s ease; will-change: opacity, transform; }
-    .reveal.visible{ opacity:1; transform:none; }
-
-    /* ---------- MOBILE BREAKPOINTS ---------- */
-    @media (max-width: 980px){
-      .hero-inner{ grid-template-columns:1fr; padding-top:56px; gap:22px; }
-      .nav-links{ display:none; }
-      .hamburger{ display:flex; }
-      .mobile-menu.open{ display:flex; }
-      .grid-3{ grid-template-columns:1fr; }
-      .grid-2{ grid-template-columns:1fr; }
-      .arch{ grid-template-columns:1fr; }
-      .hero-shot{ padding:12px; }
-      .shot-frame{ aspect-ratio:auto; }
-      .mock{ grid-template-columns: 1fr; overflow:hidden; } /* MOBILE: contain internals */
-      .mock-sidebar{ flex-direction:row; overflow-x:auto; border-right:none; border-bottom:1px solid var(--line); gap:6px; min-width:0; }
-      .mock-main{ padding:10px; }
-      .mock-grid{ grid-template-columns:1fr; }
-      .mock-mini{ grid-template-columns:1fr; }
-      .chart{ height:120px; }
-      .pill{ font-size:.78rem; padding:6px 10px; }
-      .trust{ padding-bottom:14px; }
-      .arch-svg svg text{ font-size:16px !important; }
-    }
-
-    @media (max-width: 520px){
-      .hero-inner{ padding: 58px 16px 30px; }
-      h1{ font-size: 1.9rem; }
-      .sub{ font-size: 1rem; }
-      .btn{ padding:9px 14px; }
-      .arch-svg svg text{ font-size:17px !important; }
+    @media (max-width:520px){
+      .hero-inner{padding:58px 16px 30px}
+      h1{font-size:1.9rem}.sub{font-size:1rem}.btn{padding:9px 14px}
+      .arch-svg svg text{font-size:17px!important}
     }
   </style>
 </head>
@@ -276,8 +181,7 @@
   <nav>
     <div class="nav-inner">
       <div class="brand" aria-label="GhostWall Home">
-        <span class="dot"></span>
-        <span>GhostWall™</span>
+        <span class="dot"></span><span>GhostWall™</span>
       </div>
 
       <div class="nav-links">
@@ -292,7 +196,6 @@
         <span></span>
       </button>
     </div>
-
     <div id="mobileMenu" class="mobile-menu">
       <a href="#features">Features</a>
       <a href="#architecture">Architecture</a>
@@ -373,7 +276,7 @@
                   </div>
                 </div>
 
-                <div class="mock-card" style="grid-column: 1 / -1;">
+                <div class="mock-card" style="grid-column:1 / -1;">
                   <h4>Recent Alerts</h4>
                   <div class="table">
                     <div class="thead">
@@ -406,109 +309,67 @@
                     </div>
                   </div>
                 </div>
-              </div> <!-- /mock-grid -->
-            </div> <!-- /mock-main -->
-          </div>
-          <!-- /DASHBOARD MOCK -->
+
+              </div><!-- /mock-grid -->
+            </div><!-- /mock-main -->
+          </div><!-- /mock -->
         </div>
       </div>
     </div>
 
-    <div class="trust">
-      <small>Built for</small>
-      <div class="trust-logos">
-        <span class="pill">Financial Services</span>
-        <span class="pill">Defense</span>
-        <span class="pill">Healthcare</span>
-        <span class="pill">Cloud-Native</span>
-        <span class="pill">Critical Infrastructure</span>
+    <!-- TRUST BAND -->
+    <div class="trust-wrap">
+      <div class="trust">
+        <div class="label">BUILT FOR</div>
+        <div class="trust-logos">
+          <span class="pill">Financial Services</span>
+          <span class="pill">Defense</span>
+          <span class="pill">Healthcare</span>
+          <span class="pill">Cloud-Native</span>
+          <span class="pill">Critical Infrastructure</span>
+        </div>
       </div>
     </div>
   </header>
 
   <main>
-    <!-- FEATURES -->
     <section id="features">
       <div class="wrap">
         <div class="section-title">
           <h2>Why security leaders choose GhostWall</h2>
           <p>Outcome-focused protection with measurable MTTD/MTTR gains.</p>
         </div>
-
         <div class="grid-3 reveal">
-          <div class="feat">
-            <i>1</i>
-            <div>
-              <h3>Real-time detection</h3>
-              <p>Suricata-powered deep packet inspection plus ML classification to identify known and unknown threats across L3–L7.</p>
-            </div>
-          </div>
-          <div class="feat">
-            <i>2</i>
-            <div>
-              <h3>Autonomous response</h3>
-              <p>Validates patterns, injects live firewall rules in ms, and auto-expires them to minimize noise and maintain performance.</p>
-            </div>
-          </div>
-          <div class="feat">
-            <i>3</i>
-            <div>
-              <h3>GhostChain memory</h3>
-              <p>Encrypted, peer-to-peer sharing of zero-day signals across nodes—no central choke point. One node learns, all remember.</p>
-            </div>
-          </div>
+          <div class="feat"><i>1</i><div><h3>Real-time detection</h3><p>Suricata-powered deep packet inspection plus ML classification to identify known and unknown threats across L3–L7.</p></div></div>
+          <div class="feat"><i>2</i><div><h3>Autonomous response</h3><p>Validates patterns, injects live firewall rules in ms, and auto-expires them to minimize noise and maintain performance.</p></div></div>
+          <div class="feat"><i>3</i><div><h3>GhostChain memory</h3><p>Encrypted, peer-to-peer sharing of zero-day signals across nodes—no central choke point. One node learns, all remember.</p></div></div>
         </div>
-
         <div class="grid-3 reveal" style="margin-top:18px;">
-          <div class="feat">
-            <i>4</i>
-            <div>
-              <h3>Human-in-the-loop</h3>
-              <p>Confidence thresholds and hold-down timers ensure analysts approve sensitive actions in high-stakes networks.</p>
-            </div>
-          </div>
-          <div class="feat">
-            <i>5</i>
-            <div>
-              <h3>Observable & auditable</h3>
-              <p>Every decision is logged with features, scores, and rationale. Export to SIEM, Slack, email, or JSON forensics.</p>
-            </div>
-          </div>
-          <div class="feat">
-            <i>6</i>
-            <div>
-              <h3>Built for performance</h3>
-              <p>Written in Python with C-accelerated paths where it counts, leveraging Suricata’s battle-tested engine and NFQUEUE.</p>
-            </div>
-          </div>
+          <div class="feat"><i>4</i><div><h3>Human-in-the-loop</h3><p>Confidence thresholds and hold-down timers ensure analysts approve sensitive actions in high-stakes networks.</p></div></div>
+          <div class="feat"><i>5</i><div><h3>Observable & auditable</h3><p>Every decision is logged with features, scores, and rationale. Export to SIEM, Slack, email, or JSON forensics.</p></div></div>
+          <div class="feat"><i>6</i><div><h3>Built for performance</h3><p>Written in Python with C-accelerated paths where it counts, leveraging Suricata’s battle-tested engine and NFQUEUE.</p></div></div>
         </div>
       </div>
     </section>
 
-    <!-- PRODUCT / PANELS -->
     <section id="product" class="reveal">
       <div class="wrap grid-2">
         <div class="panel">
           <h3 class="mono" style="margin-top:0">Live Alerts Pipeline</h3>
-          <pre>
-[AI] Threat detected: 192.168.0.12 → port_scan_variant_B
+          <pre>[AI] Threat detected: 192.168.0.12 → port_scan_variant_B
 Confidence: 0.992
 Action: Alert + Log
-↳ write alerts.json; push Slack; export to SIEM
-          </pre>
+↳ write alerts.json; push Slack; export to SIEM</pre>
         </div>
         <div class="panel">
           <h3 class="mono" style="margin-top:0">Automated Rule Injection</h3>
-          <pre>
-[FIREWALL] rule injected → DROP src 192.168.1.45 dst ANY
+          <pre>[FIREWALL] rule injected → DROP src 192.168.1.45 dst ANY
 Confidence: 0.987  | TTL: 60m | Reason: lateral_movement_pred
-Auto-revert on: clean window + analyst approval
-          </pre>
+Auto-revert on: clean window + analyst approval</pre>
         </div>
       </div>
     </section>
 
-    <!-- ARCHITECTURE -->
     <section id="architecture">
       <div class="wrap">
         <div class="section-title">
@@ -517,51 +378,30 @@ Auto-revert on: clean window + analyst approval
         </div>
         <div class="arch reveal">
           <div class="arch-svg">
-            <!-- Architecture diagram with arrowheads -->
             <svg viewBox="0 0 900 420" xmlns="http://www.w3.org/2000/svg">
               <defs>
                 <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
-                  <stop offset="0%" stop-color="#28ff7c" stop-opacity="0.9"/>
-                  <stop offset="100%" stop-color="#28ff7c" stop-opacity="0.25"/>
+                  <stop offset="0%" stop-color="#28ff7c" stop-opacity="0.9"/><stop offset="100%" stop-color="#28ff7c" stop-opacity="0.25"/>
                 </linearGradient>
-                <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
-                  <feGaussianBlur stdDeviation="6" result="b"/>
-                  <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
-                </filter>
-                <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
-                  <path d="M0,0 L10,3 L0,6 z" fill="#28ff7c" opacity="0.9"/>
-                </marker>
+                <filter id="glow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="6" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+                <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L10,3 L0,6 z" fill="#28ff7c" opacity="0.9"/></marker>
               </defs>
               <rect x="10" y="10" width="880" height="400" rx="12" fill="#0c120e" stroke="rgba(255,255,255,.08)"/>
-
-              <!-- Suricata sensor -->
               <rect x="60" y="80" width="250" height="90" rx="10" fill="#0e1511" stroke="#2cfb7b" opacity="0.5"/>
               <text x="75" y="120" fill="#c9f5db" font-family="monospace" font-size="14">Suricata DPI + NFQUEUE</text>
-
-              <!-- AI Engine -->
               <rect x="335" y="70" width="230" height="110" rx="10" fill="#0e1511" stroke="#2cfb7b" opacity="0.5"/>
               <text x="350" y="112" fill="#c9f5db" font-family="monospace" font-size="14">ML Classifier &amp; Policy</text>
               <text x="350" y="132" fill="#c9f5db" font-family="monospace" font-size="14">Thresholds &amp; Explain</text>
-
-              <!-- Firewall -->
               <rect x="595" y="80" width="250" height="90" rx="10" fill="#0e1511" stroke="#2cfb7b" opacity="0.5"/>
               <text x="610" y="120" fill="#c9f5db" font-family="monospace" font-size="14">Rule Injection</text>
-
-              <!-- Lines with arrows -->
               <path d="M310 125 L335 125" stroke="url(#g)" stroke-width="2" filter="url(#glow)" marker-end="url(#arrow)"/>
               <path d="M565 125 L595 125" stroke="url(#g)" stroke-width="2" filter="url(#glow)" marker-end="url(#arrow)"/>
-
-              <!-- Outputs -->
               <rect x="130" y="230" width="200" height="70" rx="10" fill="#0e1511" stroke="#2cfb7b" opacity="0.5"/>
               <text x="150" y="270" fill="#c9f5db" font-family="monospace" font-size="14">Slack / Email</text>
-
               <rect x="360" y="230" width="200" height="70" rx="10" fill="#0e1511" stroke="#2cfb7b" opacity="0.5"/>
               <text x="377" y="270" fill="#c9f5db" font-family="monospace" font-size="14">SIEM / JSON</text>
-
               <rect x="590" y="230" width="200" height="70" rx="10" fill="#0e1511" stroke="#2cfb7b" opacity="0.5"/>
               <text x="612" y="270" fill="#c9f5db" font-family="monospace" font-size="14">GhostChain Sync</text>
-
-              <!-- Arrows down -->
               <path d="M450 180 L450 230" stroke="url(#g)" stroke-width="2" filter="url(#glow)" marker-end="url(#arrow)"/>
               <path d="M210 170 L210 230" stroke="url(#g)" stroke-width="2" filter="url(#glow)" marker-end="url(#arrow)"/>
               <path d="M690 170 L690 230" stroke="url(#g)" stroke-width="2" filter="url(#glow)" marker-end="url(#arrow)"/>
@@ -582,7 +422,6 @@ Auto-revert on: clean window + analyst approval
       </div>
     </section>
 
-    <!-- ROADMAP -->
     <section id="roadmap">
       <div class="wrap">
         <div class="section-title">
@@ -590,37 +429,20 @@ Auto-revert on: clean window + analyst approval
           <p>From passive detection to autonomous, distributed defense.</p>
         </div>
         <div class="grid-2 reveal">
-          <div class="step">
-            <h4>Phase I — Detection</h4>
-            <p>Passive observer mode. ML classification tied to Suricata, confidence-scored alerts to Slack/JSON/SIEM.</p>
-            <pre class="mono">&gt; suricata -c /etc/suricata/config.yaml
+          <div class="step"><h4>Phase I — Detection</h4><p>Passive observer mode. ML classification tied to Suricata, confidence-scored alerts to Slack/JSON/SIEM.</p><pre class="mono">&gt; suricata -c /etc/suricata/config.yaml
 [AI] Threat detected: 192.168.0.12
-Action: Alert + Log | Confidence: 99.2%</pre>
-          </div>
-          <div class="step">
-            <h4>Phase II — Response</h4>
-            <p>Validated patterns trigger live rule injection within milliseconds; rules auto-revert unless reconfirmed.</p>
-            <pre class="mono">[FIREWALL] DROP src 192.168.1.45 dst ANY
-Confidence: 98.7% | TTL: 60m</pre>
-          </div>
-          <div class="step">
-            <h4>Phase III — Evolution</h4>
-            <p>Agent self-tunes thresholds based on outcomes; adds behavior patterns; improves precision over time.</p>
-            <pre class="mono">- threshold = 0.90
+Action: Alert + Log | Confidence: 99.2%</pre></div>
+          <div class="step"><h4>Phase II — Response</h4><p>Validated patterns trigger live rule injection within milliseconds; rules auto-revert unless reconfirmed.</p><pre class="mono">[FIREWALL] DROP src 192.168.1.45 dst ANY
+Confidence: 98.7% | TTL: 60m</pre></div>
+          <div class="step"><h4>Phase III — Evolution</h4><p>Agent self-tunes thresholds based on outcomes; adds behavior patterns; improves precision over time.</p><pre class="mono">- threshold = 0.90
 + threshold = 0.95 // after FP review
-+ add_behavior_pattern('port_scan_variant_B')</pre>
-          </div>
-          <div class="step">
-            <h4>Phase IV — GhostChain</h4>
-            <p>Encrypted, peer-to-peer sharing of zero-day indicators and models. One learns; all benefit.</p>
-            <pre class="mono">[NODE 07F3] recv from 11C9 → ZX9-HYDRA
-Confidence: 99.1% | Signature Shared: ✓</pre>
-          </div>
++ add_behavior_pattern('port_scan_variant_B')</pre></div>
+          <div class="step"><h4>Phase IV — GhostChain</h4><p>Encrypted, peer-to-peer sharing of zero-day indicators and models. One learns; all benefit.</p><pre class="mono">[NODE 07F3] recv from 11C9 → ZX9-HYDRA
+Confidence: 99.1% | Signature Shared: ✓</pre></div>
         </div>
       </div>
     </section>
 
-    <!-- TRUST & COMPLIANCE -->
     <section id="trust">
       <div class="wrap reveal">
         <div class="section-title">
@@ -653,20 +475,19 @@ Confidence: 99.1% | Signature Shared: ✓</pre>
       </div>
     </section>
 
-    <!-- CTA BAND -->
     <section aria-label="Call to action" class="wrap cta-band reveal" id="contact">
       <h3>See GhostWall in action</h3>
       <p>Request a private demo or join the early access waitlist.</p>
-      <div style="display:flex; gap:10px; justify-content:center; flex-wrap:wrap;">
+      <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;">
         <a class="btn" href="https://forms.gle/4YFZ5zAYBMaiYqea9" target="_blank" rel="noopener">Request Demo</a>
-        <a class="btn" href="mailto:founder@ghostwall.org?subject=GhostWall%20—%20Early%20Access&body=Hi%20Devin%2C%0D%0A%0D%0AWe'd%20like%20to%20learn%20more%20about%20GhostWall." style="background:#aef3c8; color:#072114;">Email Devin</a>
+        <a class="btn" href="mailto:founder@ghostwall.org?subject=GhostWall%20—%20Early%20Access&body=Hi%20Devin%2C%0D%0A%0D%0AWe'd%20like%20to%20learn%20more%20about%20GhostWall." style="background:#aef3c8;color:#072114;">Email Devin</a>
       </div>
-      <p style="margin-top:10px; color:#cfe9d8">No spam. One email when it’s live.</p>
+      <p style="margin-top:10px;color:#cfe9d8">No spam. One email when it’s live.</p>
     </section>
   </main>
 
   <footer>
-    <div class="wrap" style="display:flex; justify-content:space-between; gap:14px; flex-wrap:wrap;">
+    <div class="wrap" style="display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;">
       <div>© 2025 GhostWall™ • Built by Devin McCall</div>
       <div style="opacity:.8">Docs • Privacy • Security • Terms</div>
     </div>
@@ -682,7 +503,6 @@ Confidence: 99.1% | Signature Shared: ✓</pre>
         bg.style.transform = `translate(${x}px, ${y}px)`;
       }, { passive:true });
     }
-
     const burger = document.querySelector('.hamburger');
     const mobileMenu = document.getElementById('mobileMenu');
     burger?.addEventListener('click', () => {
@@ -695,9 +515,8 @@ Confidence: 99.1% | Signature Shared: ✓</pre>
         burger?.setAttribute('aria-expanded', 'false');
       });
     });
-
     const io = new IntersectionObserver((entries)=>{
-      for(const e of entries){ if(e.isIntersecting) e.target.classList.add('visible'); }
+      for (const e of entries){ if(e.isIntersecting) e.target.classList.add('visible'); }
     }, { threshold: 0.12, rootMargin: '0px 0px -10% 0px' });
     document.querySelectorAll('.reveal').forEach(el => io.observe(el));
   </script>
