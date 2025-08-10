@@ -31,7 +31,7 @@
       --muted: #aab4aa;
       --accent: #28ff7c;
       --accent-2: #12d45d;
-      --accent-nav: #1fc868; /* softer nav CTA */
+      --accent-nav: #1fc868;
       --ring: rgba(40, 255, 124, 0.18);
       --shadow: 0 2px 30px var(--ring);
       --maxw: 1200px;
@@ -39,7 +39,6 @@
       --line: rgba(255,255,255,.08);
     }
 
-    /* Reset & base */
     *, *::before, *::after { box-sizing: border-box; }
     html, body { height: 100%; }
     html { scroll-behavior: smooth; }
@@ -49,7 +48,7 @@
       margin:0; color:var(--fg); background: var(--bg);
       font-family: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans";
       -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
-      overflow-x:hidden; /* prevent accidental page-wide scroll */
+      overflow-x:hidden;
     }
 
     /* Background */
@@ -98,7 +97,6 @@
       display:none; flex-direction:column; padding:10px 20px 16px; gap:10px; border-top:1px solid var(--line);
       background: rgba(5,8,6,0.7); backdrop-filter: blur(10px);
     }
-    /* MOBILE FIX: no blue links */
     .mobile-menu a{ color:var(--fg); text-decoration:none; opacity:.95; }
     .mobile-menu a:hover{ text-decoration:underline; }
 
@@ -128,11 +126,11 @@
       position:relative; overflow:hidden; display:flex; }
 
     /* --- DASHBOARD MOCK --- */
-    .mock { display:grid; grid-template-columns: 200px 1fr; width:100%; overflow:hidden; } /* MOBILE FIX: contain internals */
+    .mock { display:grid; grid-template-columns: 200px 1fr; width:100%; /* desktop: visible (no clipping) */ }
     .mock-sidebar{
       border-right:1px solid var(--line);
       background:linear-gradient(180deg,#0c120e,#0f1612);
-      padding:14px 10px; display:flex; flex-direction:column; gap:8px; min-width:160px;
+      padding:14px 10px; display:flex; flex-direction:column; gap:8px; min-width:180px;
     }
     .mock-logo{
       color:#9ff7c7; font-weight:800; letter-spacing:.06em; font-size:.9rem;
@@ -149,8 +147,9 @@
       padding:10px 12px; border:1px solid var(--line); border-radius:10px;
       background:rgba(255,255,255,.02);
     }
-    .mock-topbar .search{ opacity:.8; font-size:.9rem; color:#bfe9cf; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
-    .mock-topbar .status{ display:flex; gap:10px; flex-wrap:wrap; }
+    /* desktop: give search flexible space; keep status intact */
+    .mock-topbar .search{ flex:1; min-width:180px; opacity:.8; font-size:.9rem; color:#bfe9cf; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+    .mock-topbar .status{ display:flex; gap:10px; flex-wrap:wrap; flex-shrink:0; }
     .chip{ font-size:.75rem; padding:6px 9px; border-radius:999px; border:1px solid rgba(40,255,124,.3);
       background:rgba(40,255,124,.07); color:#c9f5db; white-space:nowrap; }
 
@@ -161,23 +160,24 @@
     .mock-card h4{ margin:0 0 8px 0; font-size:.95rem; color:#d7f1e3; }
     .mock-mini{ display:grid; grid-template-columns: repeat(3,1fr); gap:12px; }
 
-    /* chart (fake) */
+    /* chart */
     .chart{
-      height:150px; border:1px solid var(--line); border-radius:8px; overflow:hidden;
-      display:flex; align-items:flex-end; gap:6px; padding:10px; background:rgba(10,17,13,.55);
+      height:160px; border:1px solid var(--line); border-radius:8px; overflow:hidden;
+      display:flex; align-items:flex-end; gap:8px; padding:10px; background:rgba(10,17,13,.42);
     }
     .bar{
-      width:10px; border-radius:3px; background:linear-gradient(180deg, rgba(40,255,124,.8), rgba(40,255,124,.25));
+      width:12px; border-radius:3px; background:linear-gradient(180deg, rgba(40,255,124,.85), rgba(40,255,124,.28));
+      transform-origin: bottom;
       animation: grow 3.8s ease-in-out infinite;
     }
     .bar:nth-child(3n){ animation-delay:.3s }
     .bar:nth-child(2n){ animation-delay:.6s }
-    @keyframes grow { 0%,100%{ transform: scaleY(.3);} 50%{ transform: scaleY(1);} }
+    @keyframes grow { 0%,100%{ transform: scaleY(.35);} 50%{ transform: scaleY(1);} }
 
     /* table */
     .table{
       border:1px solid var(--line); border-radius:8px; overflow:auto; background:rgba(10,17,13,.55);
-      font-size:.9rem; max-width:100%; /* MOBILE FIX: contain width */
+      font-size:.9rem; max-width:100%;
     }
     .thead, .trow{ display:grid; grid-template-columns: 1.2fr 1fr 1fr .7fr .8fr; min-width:650px; }
     .thead{ background:rgba(40,255,124,.10); color:#cfe9d8; font-weight:700; }
@@ -219,7 +219,6 @@
     .step{ position:relative; padding:20px; border-radius:12px; border:1px solid var(--line); background:linear-gradient(180deg, rgba(12,18,15,.85), rgba(9,14,11,.8)); }
     .step h4{ margin:0 0 8px; letter-spacing:.08em; text-transform:uppercase; font-size:.95rem; color:#b9f5cf }
     .mono{ font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
-    /* MOBILE FIX: avoid side-scroll from long code lines */
     pre{ margin:10px 0 0; padding:12px 14px; border-radius:10px; background:#0a110d; border:1px solid rgba(40,255,124,.22); color:#9ff7c7; font-size:.92rem; white-space:pre-wrap; word-break:break-word; }
 
     /* Compliance */
@@ -234,7 +233,6 @@
     /* Footer */
     footer{ padding: 24px 20px 60px; border-top:1px solid var(--line); color:#b9c9bb; font-size:.95rem; }
 
-    /* Reveals */
     .reveal{ opacity:0; transform: translateY(24px); transition: opacity .7s ease, transform .7s ease; will-change: opacity, transform; }
     .reveal.visible{ opacity:1; transform:none; }
 
@@ -248,17 +246,15 @@
       .grid-2{ grid-template-columns:1fr; }
       .arch{ grid-template-columns:1fr; }
       .hero-shot{ padding:12px; }
-      /* HERO MOCK: stack & prevent weird inner scroll */
       .shot-frame{ aspect-ratio:auto; }
-      .mock{ grid-template-columns: 1fr; }
-      .mock-sidebar{ flex-direction:row; overflow-x:auto; border-right:none; border-bottom:1px solid var(--line); gap:6px; }
+      .mock{ grid-template-columns: 1fr; overflow:hidden; } /* MOBILE: contain internals */
+      .mock-sidebar{ flex-direction:row; overflow-x:auto; border-right:none; border-bottom:1px solid var(--line); gap:6px; min-width:0; }
       .mock-main{ padding:10px; }
       .mock-grid{ grid-template-columns:1fr; }
       .mock-mini{ grid-template-columns:1fr; }
       .chart{ height:120px; }
       .pill{ font-size:.78rem; padding:6px 10px; }
       .trust{ padding-bottom:14px; }
-      /* ARCH SVG: bigger labels on phones */
       .arch-svg svg text{ font-size:16px !important; }
     }
 
@@ -267,7 +263,6 @@
       h1{ font-size: 1.9rem; }
       .sub{ font-size: 1rem; }
       .btn{ padding:9px 14px; }
-      /* ARCH SVG labels a bit larger on very small screens */
       .arch-svg svg text{ font-size:17px !important; }
     }
   </style>
@@ -285,7 +280,6 @@
         <span>GhostWall™</span>
       </div>
 
-      <!-- Desktop links -->
       <div class="nav-links">
         <a href="#features">Features</a>
         <a href="#architecture">Architecture</a>
@@ -294,13 +288,11 @@
         <a href="#contact" class="btn btn--nav">Request a Demo</a>
       </div>
 
-      <!-- Mobile hamburger -->
       <button class="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">
         <span></span>
       </button>
     </div>
 
-    <!-- Mobile menu -->
     <div id="mobileMenu" class="mobile-menu">
       <a href="#features">Features</a>
       <a href="#architecture">Architecture</a>
@@ -681,7 +673,6 @@ Confidence: 99.1% | Signature Shared: ✓</pre>
   </footer>
 
   <script>
-    // Subtle parallax for background gradient (disabled for reduced motion)
     const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (!prefersReduced) {
       const bg = document.querySelector('.bg-grad');
@@ -692,15 +683,12 @@ Confidence: 99.1% | Signature Shared: ✓</pre>
       }, { passive:true });
     }
 
-    // Hamburger toggle
     const burger = document.querySelector('.hamburger');
     const mobileMenu = document.getElementById('mobileMenu');
     burger?.addEventListener('click', () => {
       const open = mobileMenu.classList.toggle('open');
       burger.setAttribute('aria-expanded', open ? 'true' : 'false');
     });
-
-    // Close mobile menu on link tap (nice UX)
     mobileMenu?.querySelectorAll('a').forEach(a => {
       a.addEventListener('click', () => {
         mobileMenu.classList.remove('open');
@@ -708,7 +696,6 @@ Confidence: 99.1% | Signature Shared: ✓</pre>
       });
     });
 
-    // IntersectionObserver reveals
     const io = new IntersectionObserver((entries)=>{
       for(const e of entries){ if(e.isIntersecting) e.target.classList.add('visible'); }
     }, { threshold: 0.12, rootMargin: '0px 0px -10% 0px' });
