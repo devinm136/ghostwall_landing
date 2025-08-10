@@ -3,238 +3,260 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>GhostWall™ — The Last Firewall You'll Ever Need</title>
-
-  <!-- SEO -->
-  <meta name="description" content="GhostWall is an AI-native firewall with real-time zero-day patching and autonomous defense." />
-  <link rel="canonical" href="https://ghostwall.org/">
-
-  <!-- Open Graph / Twitter -->
-  <meta property="og:title" content="GhostWall™ — The Last Firewall You'll Ever Need" />
-  <meta property="og:description" content="AI-native defense. Real-time zero-day patching. Autonomous response." />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://ghostwall.org/" />
-  <meta property="og:image" content="/og.jpg" />
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="GhostWall™ — The Last Firewall You'll Ever Need" />
-  <meta name="twitter:description" content="AI-native defense. Real-time zero-day patching. Autonomous response." />
-  <meta name="twitter:image" content="/og.jpg" />
-
-  <!-- Icons -->
-  <link rel="icon" href="/favicon.ico" />
-  <meta name="theme-color" content="#000000" />
-
+  <title>GhostWall™ - The Last Firewall You'll Ever Need</title>
   <style>
-    :root{
-      --bg: #000;
-      --fg: #fff;
-      --muted: #bfbfbf;
-      --accent: #00ff00;
-      --accent-2: #00cc00;
-      --card: rgba(0,0,0,0.85);
-      --ring: rgba(0,255,0,0.15);
-      --shadow: 0 0 20px var(--ring);
-    }
-
     /* Reset + base */
-    *, *::before, *::after { box-sizing: border-box; }
-    html, body { height: 100%; }
-    html { scroll-behavior: smooth; }
-    @media (prefers-reduced-motion: reduce){ html{ scroll-behavior: auto; } }
-
-    body {
-      margin: 0;
-      background: var(--bg);
-      color: var(--fg);
-      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono","Courier New", monospace;
+    * {
+      box-sizing: border-box;
+    }
+    body, html {
+      margin: 0; padding: 0;
+      background: black;
+      color: white;
+      font-family: 'Courier New', Courier, monospace;
+      scroll-behavior: smooth;
+      overflow-x: hidden;
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
-      overflow-x: hidden;
-      transition: background-color .8s ease;
+      transition: background-color 0.8s ease;
     }
-
-    a { color: var(--fg); text-decoration: none; }
-    a:hover { text-decoration: underline; }
-
-    .visually-hidden{
-      position:absolute!important; height:1px; width:1px; overflow:hidden;
-      clip: rect(1px,1px,1px,1px); white-space: nowrap; margin:-1px; border:0; padding:0;
+    a {
+      color: white;
+      text-decoration: none;
+      opacity: 0.8;
+      transition: opacity 0.3s;
     }
-
-    /* Nav */
-    nav[role="navigation"]{
-      position: fixed; inset: 0 0 auto 0;
-      display:flex; align-items:center; justify-content:space-between;
-      padding: 1rem 1.25rem;
+    a:hover {
+      opacity: 1;
+      text-decoration: underline;
+    }
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
       background: rgba(0,0,0,0.5);
       backdrop-filter: blur(8px);
       border-bottom: 1px solid rgba(255,255,255,0.1);
-      font-weight: 700; letter-spacing: .1em; font-size:.9rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 1.5rem;
+      font-size: 0.9rem;
       z-index: 1000;
+      font-weight: bold;
+      letter-spacing: 0.1em;
     }
-    .nav-brand { user-select:none; }
-    .nav-links a { margin-left: 1.25rem; }
-
-    main { padding-top: 4.5rem; position: relative; z-index: 1; }
-
-    /* Sections */
+    nav .nav-links a {
+      margin-left: 1.5rem;
+    }
+    main {
+      padding-top: 4.5rem;
+      position: relative;
+      z-index: 1;
+    }
     section {
-      padding: 8rem 1.5rem;
-      max-width: 900px; margin: 0 auto 4rem auto;
-      background: var(--card);
+      padding: 8rem 1.5rem 8rem;
+      max-width: 900px;
+      margin: 0 auto;
+      background: rgba(0,0,0,0.85);
       border-radius: 12px;
       backdrop-filter: blur(10px);
-      box-shadow: var(--shadow);
-      opacity: 0; transform: translateY(40px);
-      transition: opacity .8s ease-out, transform .8s ease-out;
+      box-shadow: 0 0 20px rgba(0,255,0,0.15);
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+      margin-bottom: 4rem;
       text-align: center;
-      will-change: transform, opacity;
     }
-    section.visible { opacity: 1; transform: none; }
-
+    section.visible {
+      opacity: 1;
+      transform: none;
+    }
     #intro {
-      height: 100vh; max-width: none;
-      background: transparent; box-shadow: none; margin-bottom: 6rem;
-      display:flex; flex-direction:column; align-items:center; justify-content:center;
-      opacity:1; transform:none; text-align:center;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 0 1.5rem;
+      background: transparent;
+      margin-bottom: 6rem;
     }
-    #intro h1{
-      font-size: clamp(2.5rem, 8vw, 6rem);
-      font-weight: 900; letter-spacing: .2em; line-height: 1.1; margin: 0;
-      user-select:none;
+    #intro h1 {
+      font-size: clamp(2.5rem, 8vw, 6rem) !important;
+      font-weight: 900;
+      color: white;
+      margin: 0;
+      letter-spacing: 0.2em;
+      line-height: 1.1;
+      user-select: none;
     }
-    #intro p{
-      font-size: clamp(1.1rem, 2.2vw, 1.6rem);
-      color: #d0d0d0; max-width: 780px; margin: 1.1rem auto 0; user-select:none;
+    #intro p {
+      font-size: 1.75rem;
+      color: #ccc;
+      max-width: 700px;
+      margin-top: 1rem;
+      user-select: none;
+      text-align: center;
     }
-
-    h2{
-      font-size: clamp(1.6rem, 3.2vw, 2.25rem);
-      margin: 0 0 1rem 0; letter-spacing: .12em; user-select:none;
+    h2 {
+      font-size: 2.25rem;
+      margin-bottom: 1rem;
+      letter-spacing: 0.12em;
+      color: white;
+      user-select: none;
     }
-    p{ font-size: 1.05rem; line-height:1.65; color: var(--muted); margin: 0 auto 1.4rem; max-width: 70ch; }
-
-    pre{
+    p {
+      font-size: 1.05rem;
+      line-height: 1.6;
+      color: #ccc;
+      margin-bottom: 1.5rem;
+    }
+    pre {
       background: rgba(0,0,0,0.8);
-      padding: 1rem 1.25rem; border-radius: 8px; overflow-x:auto;
-      color: #0f0; font-size: 1rem; font-family: inherit;
-      box-shadow: 0 0 5px rgba(0,255,0,0.6), inset 0 0 5px rgba(0,255,0,0.3);
-      user-select: all; text-align:left; max-width: 680px; margin: 0.5rem auto 0;
-      white-space: pre-wrap; word-break: break-word;
+      padding: 1rem 1.25rem;
+      border-radius: 8px;
+      overflow-x: auto;
+      color: #0f0;
+      font-size: 1rem;
+      font-family: monospace;
+      box-shadow:
+        0 0 5px rgba(0,255,0,0.6),
+        inset 0 0 5px rgba(0,255,0,0.3);
+      user-select: all;
+      text-align: center;
+      max-width: 600px;
+      margin: 0 auto;
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+    form {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      max-width: 500px;
+      margin: 0 auto;
+      justify-content: center;
+    }
+    input[type="email"] {
+      flex: 1 1 auto;
+      padding: 0.75rem 1rem;
+      font-size: 1rem;
+      border: none;
+      border-radius: 8px;
+      outline: none;
+      font-family: monospace;
+      color: black;
+    }
+    button {
+      background-color: #00ff00;
+      border: none;
+      border-radius: 8px;
+      padding: 0.75rem 1.5rem;
+      font-weight: 700;
+      color: black;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      font-family: monospace;
+    }
+    button:hover {
+      background-color: #00cc00;
+    }
+    footer {
+      padding: 2rem 1rem;
+      text-align: center;
+      font-size: 0.85rem;
+      color: #555;
+      background: black;
+      user-select: none;
+    }
+    canvas#matrix {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: 0;
+      pointer-events: none;
+      display: block;
+      transition: background-color 0.8s ease;
     }
 
-    /* CTA */
-    .cta{
-      display:flex; flex-wrap:wrap; gap: .8rem; justify-content:center; align-items:center;
-      max-width: 560px; margin: 0.75rem auto 0;
-    }
-    .cta input[type="email"]{
-      flex:1 1 auto; padding:.8rem 1rem; font-size:1rem; border:none; border-radius:8px; outline:none; color:#000;
-    }
-    .btn{
-      background: var(--accent); color: #000; border:none; border-radius:8px;
-      padding:.8rem 1.3rem; font-weight: 800; cursor:pointer; font-family: inherit;
-      transition: background-color .25s ease, transform .06s ease;
-    }
-    .btn:hover{ background: var(--accent-2); }
-    .btn:active{ transform: translateY(1px); }
-
-    footer{
-      padding: 2rem 1rem; text-align:center; font-size:.9rem; color:#888; user-select:none;
-      background: #000;
-    }
-
-    /* Canvas background */
-    canvas#matrix{
-      position: fixed; inset: 0; width: 100vw; height: 100vh;
-      z-index: 0; pointer-events: none; display:block;
-      transition: background-color .8s ease;
-    }
-
-    /* Responsive tweaks */
-    @media (max-width: 640px){
-      section{ padding: 4rem 1rem 5rem; }
+    /* Responsive font size for GhostWall title */
+    @media (max-width: 640px) {
+      #intro h1 {
+        font-size: 3.5rem;
+      }
+      #intro p {
+        font-size: 1.25rem;
+      }
+      h2 {
+        font-size: 1.5rem;
+      }
+      section {
+        padding: 4rem 1rem 5rem;
+      }
     }
   </style>
 </head>
 <body>
-  <a href="#intro" class="visually-hidden">Skip to main content</a>
+  <canvas id="matrix"></canvas>
 
-  <!-- Matrix background -->
-  <canvas id="matrix" aria-hidden="true" role="presentation"></canvas>
-  <noscript>
-    <style>#matrix{display:none}</style>
-  </noscript>
-
-  <!-- Top Nav -->
-  <nav role="navigation" aria-label="Primary">
-    <div class="nav-brand">GhostWall™</div>
+  <nav>
+    <div>GhostWall™</div>
     <div class="nav-links">
       <a href="#phase1">Docs</a>
       <a href="#phase2">Demo</a>
     </div>
   </nav>
 
-  <main id="content">
-    <section id="intro" class="visible" aria-label="Hero">
+  <main>
+    <section id="intro" class="visible">
       <h1>GhostWall™</h1>
       <p>The last firewall you'll ever need. Real-time zero-day patching. AI-native defense.</p>
     </section>
 
-    <section id="phase1" class="fade-section" aria-labelledby="phase1-title">
-      <h2 id="phase1-title">Phase I — Detection</h2>
-      <p>GhostWall begins as a passive observer. Tied into Suricata’s engine, it scans every packet in real time using ML classification. Threats are flagged with confidence scores, logged, and pushed to a secure alert pipeline — observe first, never disrupt.</p>
+    <section id="phase1" class="fade-section">
+      <h2>Phase I — Detection</h2>
+      <p>GhostWall begins as a passive observer. Tied into Suricata’s engine, it scans every packet in real time using machine learning classification. Threats are flagged with confidence scores, logged, and pushed to a secure alert pipeline — no action taken, only observation.</p>
       <pre>&gt; suricata -c /etc/suricata/config.yaml
 [AI] Threat detected: 192.168.0.12
 [AI] Action: Alert + Log
 [AI] Confidence: 99.2%
-[LOG] Writing to alerts.json…</pre>
+[LOG] Writing to alerts.json...</pre>
     </section>
 
-    <section id="phase2" class="fade-section" aria-labelledby="phase2-title">
-      <h2 id="phase2-title">Phase II — Response</h2>
-      <p>GhostWall shifts from watcher to warrior. With validated patterns and thresholds, the AI injects live firewall rules in milliseconds. It predicts attack paths and preemptively locks vectors before damage occurs.</p>
+    <section id="phase2" class="fade-section">
+      <h2>Phase II — Response</h2>
+      <p>GhostWall shifts from watcher to warrior. With validated patterns and thresholds, the AI now injects live firewall rules in milliseconds. It doesn’t just block threats — it predicts them, preemptively locking down vectors before damage occurs.</p>
       <pre>[FIREWALL] Rule injected:
 DROP src 192.168.1.45 dst ANY
 Confidence: 98.7%
 TTL: 60m</pre>
     </section>
 
-    <section id="phase3" class="fade-section" aria-labelledby="phase3-title">
-      <h2 id="phase3-title">Phase III — Evolution</h2>
-      <p>The agent becomes self-referential. It monitors outcomes, tunes thresholds, and patches gaps — autonomously updating its logic to harden over time.</p>
+    <section id="phase3" class="fade-section">
+      <h2>Phase III — Evolution</h2>
+      <p>GhostWall’s agent becomes self-referential. Monitoring its own success rate, it rewrites decision logic autonomously — upgrading its neural net, adapting thresholds, and patching gaps. No dev input needed. Just raw AI improvement.</p>
       <pre>- threshold = 0.90
-+ threshold = 0.95  // Auto-adjusted after false positive
++ threshold = 0.95  // Auto-adjusted from failed prediction
 + add_behavior_pattern('port_scan_variant_B')</pre>
     </section>
 
-    <section id="phase4" class="fade-section" aria-labelledby="phase4-title">
-      <h2 id="phase4-title">Phase IV — GhostChain</h2>
-      <p>Local agents sync encrypted zero-day signals across nodes. No central server, no bottlenecks. One node sees it — all remember it.</p>
+    <section id="phase4" class="fade-section">
+      <h2>Phase IV — GhostChain</h2>
+      <p>GhostWall becomes a network. Local agents sync encrypted zero-day signatures across nodes — no central server, no human intervention. Each unit contributes to a shared global memory. One node sees it, all remember it.</p>
       <pre>[NODE: #07F3] Received update from NODE: #11C9
 &gt; New Threat ID: ZX9-HYDRA
 &gt; Confidence: 99.1%
 &gt; Signature Shared: ✔</pre>
     </section>
 
-    <section id="get-access" class="fade-section" aria-labelledby="access-title">
-      <h2 id="access-title">Get Early Access</h2>
+    <section id="get-access" class="fade-section">
+      <h2>Get Early Access</h2>
       <p>Be the first to try GhostWall. We’ll notify you when it’s ready.</p>
-
-      <!-- Option A: direct Google Form link (current) -->
-      <p>
-        <a class="btn" target="_blank" rel="noopener" href="https://forms.gle/4YFZ5zAYBMaiYqea9">Request Access via Google Form →</a>
-      </p>
-
-      <!-- Option B: on-page capture (future). Keep commented out for now.
-      <form class="cta" method="post" action="/api/early-access">
-        <label for="email" class="visually-hidden">Email</label>
-        <input id="email" name="email" type="email" placeholder="you@company.com" required />
-        <button class="btn" type="submit">Request Access</button>
+      <form action="https://forms.gle/4YFZ5zAYBMaiYqea9">
+        <button type="submit">Request Access</button>
       </form>
-      -->
-
-      <p style="font-size:.85rem; color:#888;">No spam. One email when it’s live.</p>
+      <p style="font-size: 0.8rem; color: #555;">No spam. No selling. Just one email when it’s live.</p>
     </section>
   </main>
 
@@ -243,85 +265,63 @@ TTL: 60m</pre>
   </footer>
 
   <script>
-    // Reduced motion preference
-    const PREFERS_REDUCED = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-    // ===== Matrix Canvas (DPR-aware, pause on hidden) =====
     const canvas = document.getElementById('matrix');
     const ctx = canvas.getContext('2d');
+    let width, height;
+    let cols;
+    let ypos = [];
 
-    let cssW = 0, cssH = 0, cols = 0, yPos = [];
-    let raf = null;
-
-    function sizeCanvas(){
-      // CSS pixels
-      cssW = window.innerWidth;
-      cssH = window.innerHeight;
-
-      // Respect devicePixelRatio but clamp to 2 for perf
-      const dpr = Math.max(1, Math.min(2, window.devicePixelRatio || 1));
-      canvas.width = Math.floor(cssW * dpr);
-      canvas.height = Math.floor(cssH * dpr);
-      canvas.style.width = cssW + 'px';
-      canvas.style.height = cssH + 'px';
-
-      // Scale drawing to look crisp
-      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-
-      // Column width should match font size spacing
-      const colWidth = 20;
-      cols = Math.floor(cssW / colWidth);
-      yPos = Array(cols).fill(0);
+    function resize() {
+      width = canvas.width = window.innerWidth;
+      height = canvas.height = window.innerHeight;
+      cols = Math.floor(width / 20);
+      ypos = Array(cols).fill(0);
     }
 
-    function drawMatrix(){
-      // trail fade
-      ctx.fillStyle = 'rgba(0,0,0,0.08)';
-      ctx.fillRect(0, 0, cssW, cssH);
-
-      ctx.fillStyle = 'rgba(0,255,0,0.4)';
+    function matrix() {
+      ctx.fillStyle = 'rgba(0, 0, 0, 0.08)';
+      ctx.fillRect(0, 0, width, height);
+      ctx.fillStyle = 'rgba(0, 255, 0, 0.4)';
       ctx.font = '16pt monospace';
 
-      for(let i=0; i<cols; i++){
+      ypos.forEach((y, index) => {
         const text = Math.random() < 0.5 ? '0' : '1';
-        const x = i * 20;
-        const y = yPos[i];
+        const x = index * 20;
         ctx.fillText(text, x, y);
-        yPos[i] = y > cssH + Math.random()*1000 ? 0 : y + 20;
-      }
-      raf = requestAnimationFrame(drawMatrix);
+        ypos[index] = y > height + Math.random() * 10000 ? 0 : y + 20;
+      });
     }
 
-    function startMatrix(){
-      if (PREFERS_REDUCED) return; // respect user settings
-      if (!raf){ raf = requestAnimationFrame(drawMatrix); }
-    }
-    function stopMatrix(){
-      if (raf){ cancelAnimationFrame(raf); raf = null; }
+    function animate() {
+      matrix();
+      requestAnimationFrame(animate);
     }
 
-    window.addEventListener('resize', sizeCanvas);
-    window.addEventListener('orientationchange', sizeCanvas);
-    document.addEventListener('visibilitychange', () => document.hidden ? stopMatrix() : startMatrix());
+    window.addEventListener('resize', resize);
+    resize();
+    animate();
 
-    sizeCanvas();
-    startMatrix();
-
-    // ===== Background hard fade on scroll (subtle) =====
+    // Background fade to black on scroll
     window.addEventListener('scroll', () => {
-      if (PREFERS_REDUCED) return;
-      document.body.style.backgroundColor =
-        (window.scrollY > window.innerHeight / 2) ? '#000' : 'transparent';
-    }, { passive: true });
-
-    // ===== IntersectionObserver reveals =====
-    const observer = new IntersectionObserver((entries) => {
-      for (const e of entries){
-        if (e.isIntersecting) e.target.classList.add('visible');
+      if(window.scrollY > window.innerHeight / 2) {
+        document.body.style.backgroundColor = '#000';
+      } else {
+        document.body.style.backgroundColor = 'transparent';
       }
-    }, { rootMargin: '0px 0px -20% 0px', threshold: 0.1 });
+    });
 
-    document.querySelectorAll('.fade-section').forEach(el => observer.observe(el));
+    // Scroll fade-in animation
+    const fadeSections = document.querySelectorAll('.fade-section');
+    function checkFade() {
+      fadeSections.forEach(section => {
+        const rect = section.getBoundingClientRect();
+        if(rect.top < window.innerHeight * 0.75) {
+          section.classList.add('visible');
+        }
+      });
+    }
+    window.addEventListener('scroll', checkFade);
+    window.addEventListener('load', checkFade);
   </script>
 </body>
 </html>
