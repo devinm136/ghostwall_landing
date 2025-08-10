@@ -247,65 +247,76 @@ TTL: 60m</pre>
     const PREFERS_REDUCED = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     // ===== Matrix Canvas (DPR-aware, pause on hidden) =====
-    const canvas = document.getElementById('matrix');
-    const ctx = canvas.getContext('2d');
+   // ===== Matrix Canvas (DPR-aware, pause on hidden, time-based speed) =====
+const canvas = document.getElementById('matrix');
+const ctx = canvas.getContext('2d');
 
-    let cssW = 0, cssH = 0, cols = 0, yPos = [];
-    let raf = null;
+let cssW = 0, cssH = 0, cols = 0, yPos = [];
+let raf = null, lastTs = 0;
 
-    function sizeCanvas(){
-      // CSS pixels
-      cssW = window.innerWidth;
-      cssH = window.innerHeight;
+// Tweak these
+const GLYPH_SIZE = 18;           // px font size
+const COL_WIDTH  = 20;           // px column spacing
+const STEP_RESET_JITTER = 600;   // random extra length before reset
+const MATRIX_SPEED = 90;         // px per second (lower = slower)
 
-      // Respect devicePixelRatio but clamp to 2 for perf
-      const dpr = Math.max(1, Math.min(2, window.devicePixelRatio || 1));
-      canvas.width = Math.floor(cssW * dpr);
-      canvas.height = Math.floor(cssH * dpr);
-      canvas.style.width = cssW + 'px';
-      canvas.style.height = cssH + 'px';
+function sizeCanvas(){
+  cssW = window.innerWidth;
+  cssH = window.innerHeight;
 
-      // Scale drawing to look crisp
-      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  const dpr = Math.max(1, Math.min(2, window.devicePixelRatio || 1));
+  canvas.width = Math.floor(cssW * dpr);
+  canvas.height = Math.floor(cssH * dpr);
+  canvas.style.width = cssW + 'px';
+  canvas.style.height = cssH + 'px';
 
-      // Column width should match font size spacing
-      const colWidth = 20;
-      cols = Math.floor(cssW / colWidth);
-      yPos = Array(cols).fill(0);
-    }
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
-    function drawMatrix(){
-      // trail fade
-      ctx.fillStyle = 'rgba(0,0,0,0.08)';
-      ctx.fillRect(0, 0, cssW, cssH);
+  cols = Math.floor(cssW / COL_WIDTH);
+  yPos = Array(cols).fill(0);
+  ctx.font = `${GLYPH_SIZE}px monospace`;
+}
 
-      ctx.fillStyle = 'rgba(0,255,0,0.4)';
-      ctx.font = '16pt monospace';
+function drawMatrix(ts){
+  const dt = Math.min(0.05, (ts - lastTs) / 1000 || 0); // cap dt to avoid jumps
+  lastTs = ts;
 
-      for(let i=0; i<cols; i++){
-        const text = Math.random() < 0.5 ? '0' : '1';
-        const x = i * 20;
-        const y = yPos[i];
-        ctx.fillText(text, x, y);
-        yPos[i] = y > cssH + Math.random()*1000 ? 0 : y + 20;
-      }
-      raf = requestAnimationFrame(drawMatrix);
-    }
+  // trail fade
+  ctx.fillStyle = 'rgba(0,0,0,0.08)';
+  ctx.fillRect(0, 0, cssW, cssH);
 
-    function startMatrix(){
-      if (PREFERS_REDUCED) return; // respect user settings
-      if (!raf){ raf = requestAnimationFrame(drawMatrix); }
-    }
-    function stopMatrix(){
-      if (raf){ cancelAnimationFrame(raf); raf = null; }
-    }
+  ctx.fillStyle = 'rgba(0,255,0,0.4)';
 
-    window.addEventListener('resize', sizeCanvas);
-    window.addEventListener('orientationchange', sizeCanvas);
-    document.addEventListener('visibilitychange', () => document.hidden ? stopMatrix() : startMatrix());
+  const step = MATRIX_SPEED * dt; // px to move this frame
+  for (let i = 0; i < cols; i++){
+    const x = i * COL_WIDTH;
+    const y = yPos[i];
+    ctx.fillText(Math.random() < 0.5 ? '0' : '1', x, y);
+    const resetAt = cssH + Math.random() * STEP_RESET_JITTER;
+    yPos[i] = y > resetAt ? 0 : y + step;
+  }
 
-    sizeCanvas();
-    startMatrix();
+  raf = requestAnimationFrame(drawMatrix);
+}
+
+function startMatrix(){
+  if (PREFERS_REDUCED) return;
+  if (!raf){
+    lastTs = performance.now();
+    raf = requestAnimationFrame(drawMatrix);
+  }
+}
+function stopMatrix(){
+  if (raf){ cancelAnimationFrame(raf); raf = null; }
+}
+
+window.addEventListener('resize', sizeCanvas);
+window.addEventListener('orientationchange', sizeCanvas);
+document.addEventListener('visibilitychange', () => document.hidden ? stopMatrix() : startMatrix());
+
+sizeCanvas();
+startMatrix();
+
 
     // ===== Background hard fade on scroll (subtle) =====
     window.addEventListener('scroll', () => {
