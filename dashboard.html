@@ -1,22 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <link rel="canonical" href="https://ghostwall.org/">
-
-<meta property="og:title" content="GhostWall™ — AI-Native Network Defense">
-<meta property="og:description" content="Real-time zero-day protection. Autonomous response. Secure, distributed threat memory.">
-<meta property="og:type" content="website">
-<meta property="og:image" content="/og.jpg">
-<meta name="twitter:card" content="summary_large_image">
-
-<link rel="preconnect" href="https://plausible.io" crossorigin>
-
-  <script defer data-domain="ghostwall.org" src="https://plausible.io/js/script.js"></script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>GhostWall™ — Dashboard</title>
+  <link rel="canonical" href="https://ghostwall.org/dashboard.html">
+
+  <!-- Social preview -->
+  <meta property="og:title" content="GhostWall™ — Dashboard">
+  <meta property="og:description" content="A preview of the GhostWall dashboard UI: alerts, system health, and GhostChain status.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://ghostwall.org/dashboard.html">
+  <meta property="og:image" content="/og.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+
   <meta name="theme-color" content="#0a0f0a" />
   <link rel="icon" href="/favicon.ico" />
+  <link rel="preconnect" href="https://plausible.io" crossorigin>
+  <script defer data-domain="ghostwall.org" src="https://plausible.io/js/script.js"></script>
+
   <style>
     :root{
       --bg:#050607; --panel:rgba(10,14,12,.85); --panel-2:rgba(15,18,17,.7);
@@ -121,7 +123,7 @@
 
     /* responsive */
     @media (max-width:1280px){
-      .grid{grid-template-columns:1fr} /* stack inside the mock earlier on mid desktops */
+      .grid{grid-template-columns:1fr}
     }
     @media (max-width:980px){
       .nav-links{display:none}.hamburger{display:flex}.mobile-menu.open{display:flex}
@@ -156,7 +158,8 @@
         <a href="index.html#architecture">Architecture</a>
         <a href="index.html#roadmap">Roadmap</a>
         <a href="index.html#trust">Trust</a>
-        <a href="index.html#contact" class="btn btn--nav">Request a Demo</a>
+        <a href="index.html#contact" class="btn btn--nav"
+           onclick="window.plausible && plausible('Request Demo Click');">Request a Demo</a>
       </div>
       <button class="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu"><span></span></button>
     </div>
@@ -167,13 +170,13 @@
       <a href="index.html#architecture">Architecture</a>
       <a href="index.html#roadmap">Roadmap</a>
       <a href="index.html#trust">Trust</a>
-      <a href="index.html#contact" class="btn btn--nav" style="width:max-content;">Request a Demo</a>
+      <a href="index.html#contact" class="btn btn--nav" style="width:max-content;"
+         onclick="window.plausible && plausible('Request Demo Click');">Request a Demo</a>
     </div>
   </nav>
 
   <header class="page-header">
-    <div class="kicker">Preview</div>
-    <h1 class="title">Dashboard (demo)</h1>
+    <h1 class="title">Dashboard</h1>
   </header>
 
   <main class="shell">
@@ -221,7 +224,7 @@
               <h4>System Health</h4>
               <div class="mini">
                 <div class="box"><div class="chip">CPU: 41%</div><div class="chip" style="margin-top:6px;">Mem: 58%</div></div>
-                <div class="box"><div class="chip">Thru: 9.2 Gbps</div><div class="chip" style="margin-top:6px;">Latency: 1.6 ms</div></div>
+                <div class="box"><div class="chip">Throughput: 9.2 Gbps</div><div class="chip" style="margin-top:6px;">Latency: 1.6 ms</div></div>
                 <div class="box"><div class="chip">Rules Active: 183</div><div class="chip" style="margin-top:6px;">Auto-Expire: ON</div></div>
               </div>
             </div>
