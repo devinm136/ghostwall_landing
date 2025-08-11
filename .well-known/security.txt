@@ -1,0 +1,5 @@
+Contact: mailto:security@ghostwall.org
+Contact: mailto:founder@ghostwall.org
+Policy: https://ghostwall.org/security.html
+Preferred-Languages: en
+Expires: 2026-08-11
