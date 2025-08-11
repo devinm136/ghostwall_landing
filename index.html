@@ -1,23 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <link rel="canonical" href="https://ghostwall.org/">
-
-<meta property="og:title" content="GhostWall™ — AI-Native Network Defense">
-<meta property="og:description" content="Real-time zero-day protection. Autonomous response. Secure, distributed threat memory.">
-<meta property="og:type" content="website">
-<meta property="og:image" content="/og.jpg">
-<meta name="twitter:card" content="summary_large_image">
-
-<link rel="preconnect" href="https://plausible.io" crossorigin>
-
-  <script defer data-domain="ghostwall.org" src="https://plausible.io/js/script.js"></script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>GhostWall™ — AI-Native Network Defense</title>
   <meta name="description" content="GhostWall is an AI-native firewall that delivers real-time zero-day protection, autonomous response, and secure threat sharing across your network.">
+  <link rel="canonical" href="https://ghostwall.org/">
+
+  <!-- Social preview -->
+  <meta property="og:title" content="GhostWall™ — AI-Native Network Defense">
+  <meta property="og:description" content="Real-time zero-day protection. Autonomous response. Secure, distributed threat memory.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://ghostwall.org/">
+  <meta property="og:image" content="/og.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+
   <meta name="theme-color" content="#0a0f0a" />
   <link rel="icon" href="/favicon.ico" />
+  <link rel="preconnect" href="https://plausible.io" crossorigin>
+  <script defer data-domain="ghostwall.org" src="https://plausible.io/js/script.js"></script>
+
   <style>
     :root{
       --bg:#050607; --panel:rgba(10,14,12,.85); --panel-2:rgba(15,18,17,.7);
@@ -83,7 +85,7 @@
     .trust{display:flex;gap:20px;align-items:center;flex-wrap:wrap;justify-content:space-between;opacity:.95;background:rgba(40,255,124,.05);border:1px solid var(--line);border-radius:12px;padding:16px 16px}
     .trust .label{color:#cfe9d8;letter-spacing:.1em;text-transform:uppercase;font-weight:800;font-size:1rem}
     .trust-logos{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
-    .pill{display:inline-block;padding:8px 14px;border:1px solid rgba(255,255,255,.14);border-radius:999px;color:#c9e9d7;font-size:.9rem;line-height:1;background:rgba(40,255,124,.08)}
+    .pill{display:inline-block;padding:8px 14px;border:1px solid rgba(255,255,255,.14);border-radius:999px;color:#c9e9d7;font-size:1rem;line-height:1;background:rgba(40,255,124,.08)}
 
     /* sections */
     section{padding:72px 20px}
@@ -113,7 +115,7 @@
     .badge{border:1px solid rgba(255,255,255,.12);border-radius:999px;padding:8px 12px;font-size:.85rem;color:#d7f1e3;background:rgba(40,255,124,.07)}
     .cta-band{text-align:center;padding:60px 20px;margin:10px auto;background:linear-gradient(180deg,rgba(19,27,22,.8),rgba(12,18,15,.7));border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow)}
     .cta-band h3{margin:0 0 10px;font-size:clamp(1.2rem,3.2vw,1.8rem)}
-    .cta-band p{margin:0 0 16px;color:var(--muted)}
+    .cta-band p{margin:0 0 16px;color:#cfe9d8}
     footer{padding:24px 20px 60px;border-top:1px solid var(--line);color:#b9c9bb;font-size:.95rem}
 
     .reveal{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s ease;will-change:opacity,transform}
@@ -124,7 +126,7 @@
       .nav-links{display:none}.hamburger{display:flex}.mobile-menu.open{display:flex}
       .grid-3,.grid-2{grid-template-columns:1fr}
       .arch{grid-template-columns:1fr}
-      .pill{font-size:.95rem;padding:7px 12px}
+      .pill{font-size:1rem;padding:7px 12px}
     }
     @media (max-width:520px){
       .hero-inner{padding:58px 16px 30px}
@@ -151,7 +153,8 @@
         <a href="#architecture">Architecture</a>
         <a href="#roadmap">Roadmap</a>
         <a href="#trust">Trust</a>
-        <a href="#contact" class="btn btn--nav">Request a Demo</a>
+        <a href="#contact" class="btn btn--nav"
+           onclick="window.plausible && plausible('Request Demo Click');">Request a Demo</a>
       </div>
 
       <button class="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">
@@ -165,7 +168,8 @@
       <a href="#architecture">Architecture</a>
       <a href="#roadmap">Roadmap</a>
       <a href="#trust">Trust</a>
-      <a href="#contact" class="btn btn--nav" style="width:max-content;">Request a Demo</a>
+      <a href="#contact" class="btn btn--nav" style="width:max-content;"
+         onclick="window.plausible && plausible('Request Demo Click');">Request a Demo</a>
     </div>
   </nav>
 
@@ -176,7 +180,8 @@
         <h1>Real-time zero-day protection with autonomous response.</h1>
         <p class="sub">GhostWall watches every packet, predicts attacker behavior, and deploys live countermeasures in milliseconds. Powered by Suricata + machine learning, with a distributed memory we call <strong>GhostChain</strong>.</p>
         <div class="hero-cta">
-          <a href="#contact" class="btn">Request a Demo</a>
+          <a href="#contact" class="btn"
+             onclick="window.plausible && plausible('Request Demo Click');">Request a Demo</a>
           <span class="hero-note">Built by <strong>Devin McCall</strong>. Private beta 2025.</span>
         </div>
       </div>
@@ -248,7 +253,7 @@ Auto-revert on: clean window + analyst approval</pre>
         </div>
         <div class="arch reveal">
           <div class="arch-svg">
-            <!-- Updated font-size=16 so labels stay inside boxes -->
+            <!-- Inline font-size=16 keeps labels inside boxes on all screens -->
             <svg viewBox="0 0 900 420" xmlns="http://www.w3.org/2000/svg">
               <defs>
                 <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
@@ -356,7 +361,7 @@ Confidence: 99.1% | Signature Shared: ✓</pre></div>
               <span class="badge">ISO 27001 (planned)</span>
               <span class="badge">NIST 800-53</span>
               <span class="badge">GDPR</span>
-              <span class="badge">MITRE ATT&CK</span>
+              <span class="badge">MITRE ATT&amp;CK</span>
             </div>
             <p class="muted">Detailed control mapping available in the data room for qualified investors and design partners.</p>
           </div>
@@ -369,8 +374,11 @@ Confidence: 99.1% | Signature Shared: ✓</pre></div>
       <h3>See GhostWall in action</h3>
       <p>Request a private demo or join the early access waitlist.</p>
       <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;">
-        <a class="btn" href="https://forms.gle/4YFZ5zAYBMaiYqea9" target="_blank" rel="noopener">Request Demo</a>
-        <a class="btn" href="mailto:founder@ghostwall.org?subject=GhostWall%20—%20Early%20Access&body=Hi%20Devin%2C%0D%0A%0D%0AWe'd%20like%20to%20learn%20more%20about%20GhostWall." style="background:#aef3c8;color:#072114;">Email Devin</a>
+        <a class="btn" href="https://forms.gle/4YFZ5zAYBMaiYqea9" target="_blank" rel="noopener"
+           onclick="window.plausible && plausible('Request Demo Click');">Request Demo</a>
+        <a class="btn" href="mailto:founder@ghostwall.org?subject=GhostWall%20—%20Early%20Access&body=Hi%20Devin%2C%0D%0A%0D%0AWe'd%20like%20to%20learn%20more%20about%20GhostWall."
+           style="background:#aef3c8;color:#072114;"
+           onclick="window.plausible && plausible('Email Click');">Email Devin</a>
       </div>
       <p style="margin-top:10px;color:#cfe9d8">No spam. One email when it’s live.</p>
     </section>
@@ -379,7 +387,11 @@ Confidence: 99.1% | Signature Shared: ✓</pre></div>
   <footer>
     <div class="wrap" style="display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;">
       <div>© 2025 GhostWall™ • Built by Devin McCall</div>
-      <div style="opacity:.8">Docs • Privacy • Security • Terms</div>
+      <div style="opacity:.8">
+        <a href="/privacy.html">Privacy</a> •
+        <a href="/security.html">Security</a> •
+        <a href="/terms.html">Terms</a>
+      </div>
     </div>
   </footer>
 
