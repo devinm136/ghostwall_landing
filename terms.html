@@ -1,27 +1,309 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Terms • GhostWall</title>
-  <link rel="canonical" href="https://ghostwall.org/terms.html">
-  <meta name="theme-color" content="#0a0f0a">
-  <link rel="icon" href="/ghostwall-favicon-v2.png">
+  <meta charset="UTF-8" />
+  <title>Terms of Service · GhostWall</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="icon" href="favicon.ico" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
   <style>
-    body{margin:0;background:#050607;color:#e8f0e8;font-family:Inter,system-ui}
-    .wrap{max-width:900px;margin:0 auto;padding:60px 20px}
-    a{color:#9ff7c7} h1{margin:0 0 8px}
-    .card{background:rgba(15,18,17,.75);border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:22px}
+    :root {
+      --bg-main: #020617;
+      --bg-card: rgba(15, 23, 42, 0.96);
+      --accent: #22d3ee;
+      --text-main: #e5e7eb;
+      --text-soft: #9ca3af;
+      --text-faint: #4b5563;
+      --border-subtle: rgba(148, 163, 184, 0.24);
+      --radius-xl: 22px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top, #020617 0%, #000 55%, #020617 100%);
+      color: var(--text-main);
+      -webkit-font-smoothing: antialiased;
+      line-height: 1.7;
+    }
+
+    .matrix-bg {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0.16;
+      mix-blend-mode: screen;
+      background-image:
+        linear-gradient(rgba(15, 23, 42, 0.92), rgba(15, 23, 42, 0.98)),
+        radial-gradient(circle at top, rgba(34, 211, 238, 0.16), transparent 60%);
+      z-index: -2;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 4rem 2rem;
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--accent);
+      font-size: 0.9rem;
+      margin-bottom: 2rem;
+      text-decoration: none;
+      transition: transform 0.2s ease;
+    }
+
+    .back-link:hover {
+      transform: translateX(-4px);
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      background: linear-gradient(135deg, var(--text-main), var(--accent));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .last-updated {
+      color: var(--text-soft);
+      font-size: 0.9rem;
+      margin-bottom: 2rem;
+    }
+
+    .card {
+      background: var(--bg-card);
+      border-radius: var(--radius-xl);
+      border: 1px solid var(--border-subtle);
+      padding: 2rem;
+      box-shadow: 0 24px 80px rgba(0, 0, 0, 0.6);
+    }
+
+    h2 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--accent);
+      margin-top: 2rem;
+      margin-bottom: 1rem;
+    }
+
+    h2:first-child {
+      margin-top: 0;
+    }
+
+    p {
+      margin-bottom: 1rem;
+      color: var(--text-soft);
+    }
+
+    a {
+      color: var(--accent);
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.2s ease;
+    }
+
+    a:hover {
+      border-bottom-color: var(--accent);
+    }
+
+    ul {
+      margin: 1rem 0 1rem 1.5rem;
+      color: var(--text-soft);
+    }
+
+    li {
+      margin-bottom: 0.5rem;
+    }
+
+    .beta-notice {
+      background: rgba(34, 211, 238, 0.1);
+      border: 1px solid rgba(34, 211, 238, 0.3);
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .beta-notice strong {
+      color: var(--accent);
+    }
+
+    footer {
+      text-align: center;
+      padding: 3rem 1rem 2rem;
+      color: var(--text-faint);
+      font-size: 0.85rem;
+    }
   </style>
 </head>
 <body>
-  <div class="wrap">
-    <h1>Terms</h1>
-    <p class="muted">Last updated: 11 Aug 2025</p>
-    <div class="card">
-      <p>GhostWall is in private beta and provided “as is.” Formal commercial terms will be posted at general availability.</p>
+  <div class="matrix-bg"></div>
+
+  <div class="container">
+    <a href="/" class="back-link">← Back to home</a>
+    
+    <h1>Terms of Service</h1>
+    <p class="last-updated">Last updated: December 13, 2024</p>
+
+    <div class="beta-notice">
+      <strong>Early Access Notice:</strong> GhostWall is currently in private beta. These terms apply to beta participants and will be updated for general availability.
     </div>
-    <p style="margin-top:18px"><a href="/">← Back to home</a></p>
+
+    <div class="card">
+      <h2>Agreement to Terms</h2>
+      <p>
+        By accessing or using GhostWall ("the Service"), you agree to be bound by these Terms of Service. 
+        If you disagree with any part of these terms, you may not access the Service.
+      </p>
+
+      <h2>Service Description</h2>
+      <p>
+        GhostWall provides AI-powered network threat detection and response capabilities. The Service:
+      </p>
+      <ul>
+        <li>Monitors network traffic for suspicious patterns and known attack signatures</li>
+        <li>Uses machine learning to detect anomalies and zero-day threats</li>
+        <li>Automatically blocks or alerts on detected threats based on your configuration</li>
+        <li>Provides human-readable incident summaries and response recommendations</li>
+      </ul>
+
+      <h2>Acceptable Use</h2>
+      <p>You agree to use GhostWall only for:</p>
+      <ul>
+        <li>Protecting networks and systems you own or have authorization to monitor</li>
+        <li>Legitimate security research and testing on your own infrastructure</li>
+        <li>Compliance with all applicable laws and regulations</li>
+      </ul>
+      <p>You agree NOT to:</p>
+      <ul>
+        <li>Monitor networks or systems without proper authorization</li>
+        <li>Use the Service for malicious purposes or to aid in attacks</li>
+        <li>Attempt to reverse engineer, decompile, or extract the AI models</li>
+        <li>Resell or redistribute the Service without written permission</li>
+        <li>Interfere with the Service's operation or security</li>
+      </ul>
+
+      <h2>Beta Program Terms</h2>
+      <p>During the beta period:</p>
+      <ul>
+        <li>The Service is provided "as is" with no uptime guarantees</li>
+        <li>Features may change, break, or be discontinued without notice</li>
+        <li>We may reset data or configurations as needed for testing</li>
+        <li>Pricing is discounted and may change at general availability</li>
+        <li>You agree to provide feedback on bugs, usability, and feature requests</li>
+      </ul>
+
+      <h2>Service Level & Availability</h2>
+      <p>
+        While in beta, we aim for high availability but do not guarantee specific uptime percentages. 
+        At general availability, we will provide formal SLAs with uptime commitments and credits for downtime.
+      </p>
+
+      <h2>Data & Privacy</h2>
+      <p>
+        Your use of GhostWall is also governed by our <a href="privacy.html">Privacy Policy</a>. Key points:
+      </p>
+      <ul>
+        <li>You retain ownership of your network data and threat intelligence</li>
+        <li>We may use anonymized, aggregated data to improve our models</li>
+        <li>We never share or sell your data to third parties</li>
+        <li>You can export or delete your data at any time</li>
+      </ul>
+
+      <h2>Intellectual Property</h2>
+      <p>
+        GhostWall and its underlying technology, including all AI models, detection logic, and software, 
+        are proprietary to GhostWall Security and protected by copyright, patent, and trade secret laws.
+      </p>
+
+      <h2>Limitation of Liability</h2>
+      <p>
+        GhostWall is a security tool, not a guarantee of protection. We are not liable for:
+      </p>
+      <ul>
+        <li>Threats that evade detection (no security solution catches 100% of attacks)</li>
+        <li>False positives that disrupt legitimate traffic</li>
+        <li>Damages resulting from service outages or configuration errors</li>
+        <li>Third-party breaches or attacks on your infrastructure</li>
+      </ul>
+      <p>
+        Our maximum liability is limited to the amount you paid for the Service in the 12 months preceding the claim.
+      </p>
+
+      <h2>Indemnification</h2>
+      <p>
+        You agree to indemnify and hold GhostWall harmless from any claims arising from:
+      </p>
+      <ul>
+        <li>Your violation of these terms</li>
+        <li>Unauthorized monitoring or use of the Service</li>
+        <li>Your negligence or willful misconduct</li>
+      </ul>
+
+      <h2>Termination</h2>
+      <p>
+        Either party may terminate the Service at any time:
+      </p>
+      <ul>
+        <li>You may cancel your subscription with 30 days' notice</li>
+        <li>We may suspend or terminate your account for Terms violations</li>
+        <li>We may discontinue the beta program with 60 days' notice</li>
+      </ul>
+      <p>
+        Upon termination, you'll have 30 days to export your data before it's permanently deleted.
+      </p>
+
+      <h2>Changes to Terms</h2>
+      <p>
+        We may update these terms as the Service evolves. Material changes will be announced via:
+      </p>
+      <ul>
+        <li>Email notification to your account address</li>
+        <li>In-app dashboard notification</li>
+        <li>30-day advance notice before changes take effect</li>
+      </ul>
+
+      <h2>Dispute Resolution</h2>
+      <p>
+        Any disputes will be resolved through:
+      </p>
+      <ul>
+        <li>Good faith negotiation between parties</li>
+        <li>Binding arbitration if negotiation fails (costs split equally)</li>
+        <li>Governed by the laws of Delaware, USA</li>
+      </ul>
+
+      <h2>Contact & Support</h2>
+      <p>
+        For questions about these terms:
+      </p>
+      <ul>
+        <li>General inquiries: <a href="mailto:founder@ghostwall.org">founder@ghostwall.org</a></li>
+        <li>Legal questions: <a href="mailto:legal@ghostwall.org">legal@ghostwall.org</a></li>
+        <li>Support: <a href="mailto:support@ghostwall.org">support@ghostwall.org</a></li>
+      </ul>
+
+      <p style="margin-top: 2rem; font-size: 0.9rem; color: var(--text-faint);">
+        By using GhostWall, you acknowledge that you have read, understood, and agree to be bound by these Terms of Service.
+      </p>
+    </div>
   </div>
+
+  <footer>
+    © 2024 GhostWall Security. All rights reserved.
+  </footer>
 </body>
 </html>
