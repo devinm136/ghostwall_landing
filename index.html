@@ -64,7 +64,7 @@
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    html, body { height: 100%; }
+    html, body { height: 100%; scroll-behavior: smooth; }
 
     body {
       font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
@@ -184,6 +184,34 @@
       padding: 0 1.2rem 4rem;
     }
 
+    /* ========= SECTION COMMON ========= */
+    section {
+      margin-bottom: 6rem;
+    }
+
+    .section-label {
+      font-size: .72rem;
+      text-transform: uppercase;
+      letter-spacing: .16em;
+      color: var(--accent);
+      margin-bottom: .8rem;
+    }
+
+    .section-title {
+      font-size: clamp(2rem, 3.5vw, 2.8rem);
+      font-weight: 700;
+      margin-bottom: 1rem;
+      line-height: 1.2;
+    }
+
+    .section-subtitle {
+      font-size: 1.1rem;
+      color: var(--text-soft);
+      max-width: 700px;
+      line-height: 1.6;
+      margin-bottom: 2.5rem;
+    }
+
     /* ========= HERO ========= */
     .hero {
       padding: 4rem 0 3rem;
@@ -275,9 +303,233 @@
     .log span.alert { color: #f87171; }
     .log span.ip { color: var(--accent); }
 
+    /* ========= HOW IT WORKS ========= */
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      margin-top: 2.5rem;
+    }
+
+    .step {
+      background: var(--bg-card);
+      border-radius: var(--radius);
+      padding: 2rem;
+      border: 1px solid var(--border-subtle);
+      transition: all 0.3s ease;
+    }
+
+    .step:hover {
+      border-color: var(--accent);
+      transform: translateY(-4px);
+      box-shadow: 0 20px 60px rgba(34,211,238,0.2);
+    }
+
+    .step-number {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: var(--accent-soft);
+      border: 2px solid var(--accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 1.2rem;
+      color: var(--accent);
+      margin-bottom: 1.5rem;
+    }
+
+    .step-title {
+      font-size: 1.3rem;
+      font-weight: 600;
+      margin-bottom: .8rem;
+    }
+
+    .step-desc {
+      color: var(--text-soft);
+      line-height: 1.6;
+    }
+
+    /* ========= FEATURES ========= */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+      margin-top: 2.5rem;
+    }
+
+    .feature {
+      background: var(--bg-card);
+      border-radius: var(--radius);
+      padding: 1.8rem;
+      border: 1px solid var(--border-subtle);
+      transition: all 0.3s ease;
+    }
+
+    .feature:hover {
+      border-color: var(--accent);
+      box-shadow: 0 12px 40px rgba(34,211,238,0.15);
+    }
+
+    .feature-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      background: var(--accent-soft);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      margin-bottom: 1.2rem;
+    }
+
+    .feature-title {
+      font-size: 1.15rem;
+      font-weight: 600;
+      margin-bottom: .6rem;
+    }
+
+    .feature-desc {
+      color: var(--text-soft);
+      line-height: 1.6;
+      font-size: .95rem;
+    }
+
+    /* ========= WHY GHOSTWALL ========= */
+    .why-content {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 3rem;
+      align-items: center;
+      margin-top: 2.5rem;
+    }
+
+    .why-points {
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+    }
+
+    .why-point {
+      display: flex;
+      gap: 1rem;
+      align-items: start;
+    }
+
+    .why-icon {
+      width: 28px;
+      height: 28px;
+      border-radius: 8px;
+      background: var(--accent-soft);
+      border: 1px solid var(--accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: .15rem;
+    }
+
+    .why-icon::before {
+      content: '✓';
+      color: var(--accent);
+      font-weight: 700;
+    }
+
+    .why-text strong {
+      display: block;
+      margin-bottom: .3rem;
+      color: var(--text-main);
+    }
+
+    .why-text p {
+      color: var(--text-soft);
+      line-height: 1.5;
+      font-size: .95rem;
+    }
+
+    .why-card {
+      background: radial-gradient(circle at top right,
+        rgba(34,211,238,.2),
+        rgba(15,23,42,.95)
+      );
+      border-radius: var(--radius);
+      padding: 2rem;
+      border: 1px solid var(--border-subtle);
+    }
+
+    .why-card-title {
+      font-size: .8rem;
+      text-transform: uppercase;
+      letter-spacing: .12em;
+      color: var(--accent);
+      margin-bottom: 1rem;
+    }
+
+    .why-card-stat {
+      font-size: 3rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, var(--accent), var(--accent-strong));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1;
+      margin-bottom: .5rem;
+    }
+
+    .why-card-label {
+      color: var(--text-soft);
+      font-size: .9rem;
+    }
+
+    /* ========= BUILT BY ========= */
+    .built-by {
+      background: var(--bg-card);
+      border-radius: var(--radius);
+      padding: 3rem;
+      border: 1px solid var(--border-subtle);
+      text-align: center;
+    }
+
+    .built-by-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: .6rem;
+      background: var(--accent-soft);
+      border: 1px solid var(--accent);
+      border-radius: 999px;
+      padding: .5rem 1.2rem;
+      font-size: .85rem;
+      color: var(--accent);
+      margin-bottom: 1.5rem;
+    }
+
+    .built-by-title {
+      font-size: 1.8rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+
+    .built-by-desc {
+      color: var(--text-soft);
+      max-width: 600px;
+      margin: 0 auto 1.5rem;
+      line-height: 1.6;
+    }
+
+    .built-by-link {
+      color: var(--accent);
+      text-decoration: underline;
+      transition: color 0.2s ease;
+    }
+
+    .built-by-link:hover {
+      color: var(--accent-strong);
+    }
+
     /* ========= CTA SECTION ========= */
     #cta {
-      margin-top: 4rem;
+      margin-top: 5rem;
     }
 
     #cta .hero-card {
@@ -288,7 +540,7 @@
     }
 
     #cta h3 {
-      font-size: 1.5rem;
+      font-size: 1.8rem;
       margin-bottom: .8rem;
     }
 
@@ -333,6 +585,9 @@
     @media (max-width: 880px) {
       .hero { grid-template-columns: 1fr; }
       .nav-right { display: none; }
+      .steps { grid-template-columns: 1fr; }
+      .features-grid { grid-template-columns: 1fr; }
+      .why-content { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -351,6 +606,7 @@
       </div>
     </div>
     <div class="nav-right">
+      <a href="#how-it-works" class="nav-link">How it Works</a>
       <a href="#features" class="nav-link">Features</a>
       <a href="dashboard.html" class="nav-link">Dashboard</a>
       <button class="nav-cta" onclick="document.getElementById('cta').scrollIntoView({behavior:'smooth'})">
@@ -361,6 +617,7 @@
 </header>
 
 <main>
+  <!-- HERO -->
   <section class="hero">
     <div>
       <h1>The last <span>firewall</span> you'll ever need.</h1>
@@ -386,6 +643,173 @@
     </div>
   </section>
 
+  <!-- HOW IT WORKS -->
+  <section id="how-it-works">
+    <div class="section-label">How it works</div>
+    <h2 class="section-title">Autonomous defense in three steps</h2>
+    <p class="section-subtitle">
+      Traditional firewalls wait for humans to write rules. GhostWall learns, adapts, and acts in real time.
+    </p>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step-number">1</div>
+        <div class="step-title">Observe</div>
+        <div class="step-desc">
+          Suricata-powered deep packet inspection monitors every flow, enriching events with context before they hit your dashboard.
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-number">2</div>
+        <div class="step-title">Decide</div>
+        <div class="step-desc">
+          AI threat scoring analyzes patterns, groups related alerts, and assigns confidence scores — deciding whether to block, flag, or log.
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-number">3</div>
+        <div class="step-title">Act</div>
+        <div class="step-desc">
+          Automatic blocking rules are applied instantly. GhostWall then explains what it did in language your team can actually understand.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section id="features">
+    <div class="section-label">Core capabilities</div>
+    <h2 class="section-title">Built for defenders who need answers, not alerts</h2>
+    <p class="section-subtitle">
+      Every feature is designed to reduce noise, increase visibility, and give you control when you need it.
+    </p>
+
+    <div class="features-grid">
+      <div class="feature">
+        <div class="feature-icon">🧠</div>
+        <div class="feature-title">AI-powered threat scoring</div>
+        <div class="feature-desc">
+          Machine learning models score every event in real time, learning attack patterns and reducing false positives automatically.
+        </div>
+      </div>
+
+      <div class="feature">
+        <div class="feature-icon">⚡</div>
+        <div class="feature-title">Autonomous blocking</div>
+        <div class="feature-desc">
+          High-confidence threats are blocked instantly. No waiting for patches, signatures, or human intervention.
+        </div>
+      </div>
+
+      <div class="feature">
+        <div class="feature-icon">📊</div>
+        <div class="feature-title">Human-readable summaries</div>
+        <div class="feature-desc">
+          Every incident gets a clear explanation: what happened, what GhostWall did, and what you should check next.
+        </div>
+      </div>
+
+      <div class="feature">
+        <div class="feature-icon">🔗</div>
+        <div class="feature-title">Slack / Teams integration</div>
+        <div class="feature-desc">
+          Get live alerts in chat with buttons to acknowledge, block, or investigate. Handle incidents without opening the dashboard.
+        </div>
+      </div>
+
+      <div class="feature">
+        <div class="feature-icon">🎯</div>
+        <div class="feature-title">Zero-day detection</div>
+        <div class="feature-desc">
+          Behavioral analysis catches novel attacks that signature-based systems miss. No updates required.
+        </div>
+      </div>
+
+      <div class="feature">
+        <div class="feature-icon">⚙️</div>
+        <div class="feature-title">Secure by default</div>
+        <div class="feature-desc">
+          Opinionated profiles get small teams protected quickly. Advanced users can tune every threshold and policy.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY GHOSTWALL -->
+  <section id="why">
+    <div class="section-label">Why GhostWall</div>
+    <h2 class="section-title">Security infrastructure should defend itself</h2>
+    
+    <div class="why-content">
+      <div class="why-points">
+        <div class="why-point">
+          <div class="why-icon"></div>
+          <div class="why-text">
+            <strong>SOCs are drowning in alerts</strong>
+            <p>Traditional tools generate noise. GhostWall generates answers. Alert fatigue kills response times — we fix that.</p>
+          </div>
+        </div>
+
+        <div class="why-point">
+          <div class="why-icon"></div>
+          <div class="why-text">
+            <strong>Zero-days don't wait for patches</strong>
+            <p>Signature-based defenses are always behind. GhostWall learns behavior patterns, catching novel attacks in real time.</p>
+          </div>
+        </div>
+
+        <div class="why-point">
+          <div class="why-icon"></div>
+          <div class="why-text">
+            <strong>Threats move at machine speed</strong>
+            <p>Attackers exploit systems in milliseconds. Human-in-the-loop response is too slow. Autonomy is the only answer.</p>
+          </div>
+        </div>
+
+        <div class="why-point">
+          <div class="why-icon"></div>
+          <div class="why-text">
+            <strong>Small teams can't afford elite SOCs</strong>
+            <p>GhostWall acts as your first responder. Get enterprise-grade defense without enterprise-grade staffing.</p>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="why-card" style="margin-bottom: 1.5rem;">
+          <div class="why-card-title">Average response time</div>
+          <div class="why-card-stat">&lt;100ms</div>
+          <div class="why-card-label">From detection to block</div>
+        </div>
+        <div class="why-card">
+          <div class="why-card-title">False positive rate</div>
+          <div class="why-card-stat">&lt;2%</div>
+          <div class="why-card-label">And improving with every deployment</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BUILT BY -->
+  <section id="built-by">
+    <div class="built-by">
+      <div class="built-by-badge">
+        🛡️ Built by an Air Force cyber defender
+      </div>
+      <h2 class="built-by-title">Built by defenders, for defenders</h2>
+      <p class="built-by-desc">
+        GhostWall was created out of frustration with clunky tools, buried alerts, and systems that detect but never act. 
+        It's designed for the security engineers who respond to incidents at 3 AM, not the executives who approve budgets.
+      </p>
+      <p class="built-by-desc">
+        Follow the journey on <a href="https://twitter.com/GhostWallSec" target="_blank" class="built-by-link">@GhostWallSec</a>
+      </p>
+    </div>
+  </section>
+
+  <!-- CTA -->
   <section id="cta">
     <div class="hero-card">
       <h3>Help shape GhostWall v1</h3>
