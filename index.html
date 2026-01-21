@@ -4,9 +4,9 @@
   <!-- ========= META ========= -->
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>GhostWall — Autonomous AI Network Defense</title>
+  <title>GhostWall — AI-Assisted Network Defense</title>
   <meta name="description"
-        content="GhostWall is an AI-native firewall that detects threats in real time, blocks malicious traffic autonomously, and explains incidents in plain English." />
+        content="GhostWall turns Suricata telemetry into prioritized incidents, clear explanations, and faster response—built for small teams that need signal, not noise." />
   <link rel="canonical" href="https://ghostwall.org/" />
 
   <!-- ========= FAVICON ========= -->
@@ -15,9 +15,9 @@
   <meta name="theme-color" content="#020617" />
 
   <!-- ========= OPEN GRAPH ========= -->
-  <meta property="og:title" content="GhostWall — Autonomous AI Network Defense" />
+  <meta property="og:title" content="GhostWall — AI-Assisted Network Defense" />
   <meta property="og:description"
-        content="Real-time threat detection. Autonomous response. Human-readable security." />
+        content="Suricata in. Prioritized incidents out. Faster response with human-readable security." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://ghostwall.org/" />
   <meta property="og:image" content="https://ghostwall.org/GhostWall_Logo_Transparent.png" />
@@ -467,19 +467,20 @@
     }
 
     .why-card-stat {
-      font-size: 3rem;
+      font-size: 2.2rem;
       font-weight: 700;
       background: linear-gradient(135deg, var(--accent), var(--accent-strong));
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
-      line-height: 1;
+      line-height: 1.1;
       margin-bottom: .5rem;
     }
 
     .why-card-label {
       color: var(--text-soft);
       font-size: .9rem;
+      line-height: 1.4;
     }
 
     /* ========= BUILT BY ========= */
@@ -602,12 +603,13 @@
       </div>
       <div class="brand">
         <span>GhostWall</span>
-        <span>Autonomous Defense</span>
+        <span>AI-Assisted Defense</span>
       </div>
     </div>
     <div class="nav-right">
       <a href="#how-it-works" class="nav-link">How it Works</a>
-      <a href="#features" class="nav-link">Features</a>
+      <a href="#features" class="nav-link">Capabilities</a>
+      <a href="#roadmap" class="nav-link">Roadmap</a>
       <a href="dashboard.html" class="nav-link">Dashboard</a>
       <button class="nav-cta" onclick="document.getElementById('cta').scrollIntoView({behavior:'smooth'})">
         Get early access →
@@ -620,35 +622,34 @@
   <!-- HERO -->
   <section class="hero">
     <div>
-      <h1>The last <span>firewall</span> you'll ever need.</h1>
+      <h1>Turn noisy alerts into <span>clear action</span>.</h1>
       <p>
-        GhostWall monitors every packet, predicts malicious behavior,
-        and blocks threats autonomously — while explaining incidents
-        in language humans actually understand.
+        GhostWall ingests Suricata telemetry and transforms it into prioritized incidents,
+        plain-English explanations, and faster response—built for small teams that need signal, not noise.
       </p>
       <div class="hero-actions">
         <button class="btn-primary" onclick="document.getElementById('cta').scrollIntoView({behavior:'smooth'})">
           Join early access
         </button>
-        <a href="dashboard.html" class="btn-secondary">View live dashboard →</a>
+        <a href="dashboard.html" class="btn-secondary">View dashboard →</a>
       </div>
     </div>
 
     <div class="hero-card">
       <div class="log">[INFO] Suricata sensor attached → <span class="ip">eth0</span></div>
-      <div class="log">[ALERT] <span class="alert">C2 traffic detected</span> from <span class="ip">185.44.23.8</span></div>
-      <div class="log">[AI] Risk score 0.97 → rule injected</div>
-      <div class="log">[ACTION] Packet dropped · Slack notified</div>
-      <div class="log">[SUMMARY] 5 high-severity events blocked</div>
+      <div class="log">[ALERT] <span class="alert">Suspicious beaconing</span> from <span class="ip">185.44.23.8</span></div>
+      <div class="log">[GW] Event grouped → “Possible C2 / persistence”</div>
+      <div class="log">[GW] Risk score 0.91 → notify + investigate</div>
+      <div class="log">[SUMMARY] What happened · why it matters · what to check next</div>
     </div>
   </section>
 
   <!-- HOW IT WORKS -->
   <section id="how-it-works">
     <div class="section-label">How it works</div>
-    <h2 class="section-title">Autonomous defense in three steps</h2>
+    <h2 class="section-title">Modern detection. Better decisions.</h2>
     <p class="section-subtitle">
-      Traditional firewalls wait for humans to write rules. GhostWall learns, adapts, and acts in real time.
+      Traditional tools generate raw alerts. GhostWall adds context, prioritization, and explainability—so response is faster and cleaner.
     </p>
 
     <div class="steps">
@@ -656,23 +657,23 @@
         <div class="step-number">1</div>
         <div class="step-title">Observe</div>
         <div class="step-desc">
-          Suricata-powered deep packet inspection monitors every flow, enriching events with context before they hit your dashboard.
+          Suricata provides deep packet and flow telemetry. GhostWall normalizes events and enriches them with context for analysis.
         </div>
       </div>
 
       <div class="step">
         <div class="step-number">2</div>
-        <div class="step-title">Decide</div>
+        <div class="step-title">Prioritize</div>
         <div class="step-desc">
-          AI threat scoring analyzes patterns, groups related alerts, and assigns confidence scores — deciding whether to block, flag, or log.
+          Scoring and grouping reduce noise by correlating related signals into incidents—so defenders focus on what matters most.
         </div>
       </div>
 
       <div class="step">
         <div class="step-number">3</div>
-        <div class="step-title">Act</div>
+        <div class="step-title">Explain</div>
         <div class="step-desc">
-          Automatic blocking rules are applied instantly. GhostWall then explains what it did in language your team can actually understand.
+          Each incident includes a human-readable summary: what happened, likely intent, supporting evidence, and recommended next checks.
         </div>
       </div>
     </div>
@@ -681,57 +682,100 @@
   <!-- FEATURES -->
   <section id="features">
     <div class="section-label">Core capabilities</div>
-    <h2 class="section-title">Built for defenders who need answers, not alerts</h2>
+    <h2 class="section-title">Built for defenders who need answers, not noise</h2>
     <p class="section-subtitle">
-      Every feature is designed to reduce noise, increase visibility, and give you control when you need it.
+      Practical features that reduce alert fatigue and speed up investigation—without replacing your existing stack.
     </p>
 
     <div class="features-grid">
       <div class="feature">
         <div class="feature-icon">🧠</div>
-        <div class="feature-title">AI-powered threat scoring</div>
+        <div class="feature-title">Risk scoring & prioritization</div>
         <div class="feature-desc">
-          Machine learning models score every event in real time, learning attack patterns and reducing false positives automatically.
+          Score events and group related alerts into incidents so you can triage faster and stop chasing low-value noise.
         </div>
       </div>
 
       <div class="feature">
-        <div class="feature-icon">⚡</div>
-        <div class="feature-title">Autonomous blocking</div>
+        <div class="feature-icon">🧾</div>
+        <div class="feature-title">Plain-English incident summaries</div>
         <div class="feature-desc">
-          High-confidence threats are blocked instantly. No waiting for patches, signatures, or human intervention.
+          Every incident is explained clearly: what triggered, what evidence supports it, and what to check next.
         </div>
       </div>
 
       <div class="feature">
         <div class="feature-icon">📊</div>
-        <div class="feature-title">Human-readable summaries</div>
+        <div class="feature-title">Live visibility</div>
         <div class="feature-desc">
-          Every incident gets a clear explanation: what happened, what GhostWall did, and what you should check next.
+          A clean dashboard for trends, active incidents, and investigation context—designed for speed and clarity.
         </div>
       </div>
 
       <div class="feature">
-        <div class="feature-icon">🔗</div>
-        <div class="feature-title">Slack / Teams integration</div>
+        <div class="feature-icon">🔔</div>
+        <div class="feature-title">Slack / Teams alerting</div>
         <div class="feature-desc">
-          Get live alerts in chat with buttons to acknowledge, block, or investigate. Handle incidents without opening the dashboard.
+          Get high-signal notifications in chat. Acknowledge, assign, and track response without living inside a SIEM.
         </div>
       </div>
 
       <div class="feature">
-        <div class="feature-icon">🎯</div>
-        <div class="feature-title">Zero-day detection</div>
+        <div class="feature-icon">🧩</div>
+        <div class="feature-title">Works with what you already run</div>
         <div class="feature-desc">
-          Behavioral analysis catches novel attacks that signature-based systems miss. No updates required.
+          Start with Suricata telemetry and expand over time—no rip-and-replace required to start getting value.
         </div>
       </div>
 
       <div class="feature">
         <div class="feature-icon">⚙️</div>
-        <div class="feature-title">Secure by default</div>
+        <div class="feature-title">Tunable thresholds</div>
         <div class="feature-desc">
-          Opinionated profiles get small teams protected quickly. Advanced users can tune every threshold and policy.
+          Configure sensitivity, categories, and policies so teams can control what becomes an incident vs a logged signal.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ROADMAP -->
+  <section id="roadmap">
+    <div class="section-label">Roadmap</div>
+    <h2 class="section-title">Where GhostWall is going</h2>
+    <p class="section-subtitle">
+      Autonomy is the endgame—but it has to be earned. Early access focuses on visibility, prioritization, and explainability first.
+    </p>
+
+    <div class="features-grid">
+      <div class="feature">
+        <div class="feature-icon">⚡</div>
+        <div class="feature-title">Policy-based automated containment</div>
+        <div class="feature-desc">
+          Optional actions for high-confidence incidents (e.g., quarantine by policy, blocklists, or integration-driven response).
+        </div>
+      </div>
+
+      <div class="feature">
+        <div class="feature-icon">🎯</div>
+        <div class="feature-title">Behavioral detection improvements</div>
+        <div class="feature-desc">
+          Stronger correlation and behavior signals to reduce false positives and catch patterns that signatures miss.
+        </div>
+      </div>
+
+      <div class="feature">
+        <div class="feature-icon">🔎</div>
+        <div class="feature-title">Evidence-first explainability</div>
+        <div class="feature-desc">
+          Clear “why” behind every score—supporting indicators, linked events, and what would change the confidence.
+        </div>
+      </div>
+
+      <div class="feature">
+        <div class="feature-icon">🧠</div>
+        <div class="feature-title">Long-term memory for environments</div>
+        <div class="feature-desc">
+          Baselines, known-good behaviors, and “what normal looks like” so new anomalies stand out immediately.
         </div>
       </div>
     </div>
@@ -740,53 +784,53 @@
   <!-- WHY GHOSTWALL -->
   <section id="why">
     <div class="section-label">Why GhostWall</div>
-    <h2 class="section-title">Security infrastructure should defend itself</h2>
-    
+    <h2 class="section-title">Security teams need leverage</h2>
+
     <div class="why-content">
       <div class="why-points">
         <div class="why-point">
           <div class="why-icon"></div>
           <div class="why-text">
-            <strong>SOCs are drowning in alerts</strong>
-            <p>Traditional tools generate noise. GhostWall generates answers. Alert fatigue kills response times — we fix that.</p>
+            <strong>Alert fatigue is a response killer</strong>
+            <p>Most stacks generate noise. GhostWall focuses on prioritization and incident grouping so defenders stay on the signal.</p>
           </div>
         </div>
 
         <div class="why-point">
           <div class="why-icon"></div>
           <div class="why-text">
-            <strong>Zero-days don't wait for patches</strong>
-            <p>Signature-based defenses are always behind. GhostWall learns behavior patterns, catching novel attacks in real time.</p>
+            <strong>Context is everything</strong>
+            <p>Raw alerts don’t help at 3 AM. GhostWall adds readable explanations and evidence so decisions are faster.</p>
           </div>
         </div>
 
         <div class="why-point">
           <div class="why-icon"></div>
           <div class="why-text">
-            <strong>Threats move at machine speed</strong>
-            <p>Attackers exploit systems in milliseconds. Human-in-the-loop response is too slow. Autonomy is the only answer.</p>
+            <strong>Small teams need enterprise leverage</strong>
+            <p>Not everyone has a full SOC. GhostWall is designed to help small teams triage smarter and respond cleaner.</p>
           </div>
         </div>
 
         <div class="why-point">
           <div class="why-icon"></div>
           <div class="why-text">
-            <strong>Small teams can't afford elite SOCs</strong>
-            <p>GhostWall acts as your first responder. Get enterprise-grade defense without enterprise-grade staffing.</p>
+            <strong>Autonomy should be optional</strong>
+            <p>When containment becomes real, it’ll be policy-driven and opt-in—earned through confidence and evidence.</p>
           </div>
         </div>
       </div>
 
       <div>
         <div class="why-card" style="margin-bottom: 1.5rem;">
-          <div class="why-card-title">Average response time</div>
-          <div class="why-card-stat">&lt;100ms</div>
-          <div class="why-card-label">From detection to block</div>
+          <div class="why-card-title">What you get first</div>
+          <div class="why-card-stat">Signal</div>
+          <div class="why-card-label">Prioritized incidents with context and explainability.</div>
         </div>
         <div class="why-card">
-          <div class="why-card-title">False positive rate</div>
-          <div class="why-card-stat">&lt;2%</div>
-          <div class="why-card-label">And improving with every deployment</div>
+          <div class="why-card-title">What we build toward</div>
+          <div class="why-card-stat">Autonomy</div>
+          <div class="why-card-label">Optional, policy-based containment once confidence is proven.</div>
         </div>
       </div>
     </div>
@@ -800,11 +844,11 @@
       </div>
       <h2 class="built-by-title">Built by defenders, for defenders</h2>
       <p class="built-by-desc">
-        GhostWall was created out of frustration with clunky tools, buried alerts, and systems that detect but never act. 
-        It's designed for the security engineers who respond to incidents at 3 AM, not the executives who approve budgets.
+        GhostWall was created out of frustration with clunky tools, buried alerts, and systems that detect but don’t help you decide.
+        It’s designed for the security engineers who respond to incidents at 3 AM—not just the dashboards executives approve.
       </p>
       <p class="built-by-desc">
-        Follow the journey on <a href="https://twitter.com/GhostWallSec" target="_blank" class="built-by-link">@GhostWallSec</a>
+        Follow the journey on <a href="https://twitter.com/GhostWallSec" target="_blank" class="built-by-link" rel="noopener noreferrer">@GhostWallSec</a>
       </p>
     </div>
   </section>
@@ -814,8 +858,8 @@
     <div class="hero-card">
       <h3>Help shape GhostWall v1</h3>
       <p>
-        I'm opening a limited early-access group for engineers and security teams
-        who want to test GhostWall in real environments.
+        I’m opening a limited early-access group for security engineers and small teams
+        who want to test GhostWall with real Suricata telemetry and give blunt feedback.
       </p>
       <div class="hero-actions">
         <a class="btn-primary"
