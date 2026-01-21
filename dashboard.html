@@ -822,7 +822,18 @@
         loadStaticDemo();
       }
     }
+function normalizeAction(action) {
+  if (!action) return action;
 
+  // If backend/static data says DROP, show it as containment for demo credibility.
+  // Keeps the confident tone without claiming real inline enforcement.
+  if (/^DROP\b/i.test(action)) {
+    return action
+      .replace(/^DROP\b\s*/i, "AUTO-CONTAIN (Demo) · ")
+      .replace(/\((.*?)\)/g, "($1)"); // keep your details like (24h block)
+  }
+  return action;
+}
     function updateDashboard(data) {
       const { metrics, recent_alerts } = data;
 
@@ -892,7 +903,7 @@
           <td>${alert.threat}</td>
           <td>${alert.confidence}</td>
           <td><span class="badge ${severityClass}">${alert.severity}</span></td>
-          <td><span class="badge">${alert.action}</span></td>
+          <td><span class="badge">${normalizeAction(alert.action)}</span></td>
         `;
         alertsTable.appendChild(tr);
       });
